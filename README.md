@@ -56,38 +56,55 @@ The code in this repository is for educational and research purposes only. As ma
 
 ## Magazine Editions Ported
 
-* Spring 2004
-* Summer 2004
-* Autumn 2004
-* Winter 2004
-* Spring 2005
-* Summer 2005
-* Autumn 2005
-* Winter 2005
-* Spring 2006
-* Summer 2006
-* Autumn 2006
-* Winter 2006
-* Spring 2007
-* Summer 2007
-* Autumn 2007
-* Winter 2007
-* Spring 2008
-* Summer 2008
-* Autumn 2008
-* Spring 2009
-* Summer 2009
-* Autumn 2009
-* Winter 2009
-* Spring 2010
-* Summer 2010
-* Autumn 2010
-* Winter 2010
-* Spring 2011
-* Summer 2011
-* Autumn 2011
-* Winter 2011
-* Spring 2012
+* Spring 2004 - Autumn 2026 (All editions from Volume 21 through Volume 43, Issue 3)
+
+### Complete List by Year:
+
+**2004 (Volume 21):** Spring, Summer, Autumn, Winter
+
+**2005 (Volume 22):** Spring, Summer, Autumn, Winter
+
+**2006 (Volume 23):** Spring, Summer, Autumn, Winter
+
+**2007 (Volume 24):** Spring, Summer, Autumn, Winter
+
+**2008 (Volume 25):** Spring, Summer, Autumn, Winter
+
+**2009 (Volume 26):** Spring, Summer, Autumn, Winter
+
+**2010 (Volume 27):** Spring, Summer, Autumn, Winter
+
+**2011 (Volume 28):** Spring, Summer, Autumn, Winter
+
+**2012 (Volume 29):** Spring, Summer, Autumn, Winter
+
+**2013 (Volume 30):** Spring, Summer, Autumn, Winter
+
+**2014 (Volume 31):** Spring, Summer, Autumn, Winter
+
+**2015 (Volume 32):** Spring, Summer, Autumn, Winter
+
+**2016 (Volume 33):** Spring, Summer, Autumn, Winter
+
+**2017 (Volume 34):** Spring, Summer, Autumn, Winter
+
+**2018 (Volume 35):** Spring, Summer, Autumn, Winter
+
+**2019 (Volume 36):** Spring, Summer, Autumn, Winter
+
+**2020 (Volume 37):** Spring, Summer, Autumn, Winter
+
+**2021 (Volume 38):** Spring, Summer, Autumn, Winter
+
+**2022 (Volume 39):** Spring, Summer, Autumn, Winter
+
+**2023 (Volume 40):** Spring, Summer, Autumn, Winter
+
+**2024 (Volume 41):** Spring, Summer, Autumn, Winter
+
+**2025 (Volume 42):** Spring, Summer, Autumn, Winter
+
+**2026 (Volume 43):** Spring, Summer, Autumn
 
 ## Thanks and ShoutOuts
 
