@@ -1,0 +1,7 @@
+import os
+# assign variable for file list 
+files = os.listdir(r"C:\Users\%username%\AppData\Local\Microsoft\Windows\Explorer")
+# print the contents of the directory
+print(files)
+
+

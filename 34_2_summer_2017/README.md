@@ -8,5 +8,26 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Pineapple Pi - Creating an Automated Open Wi-Fi Traffic Capturing Tool for Under $20
 
-*Code details to be added - check https://www.2600.com/code/342/  for available code listings*
+Author: Br@d
+
+Files located in `pineapple_pi_-_creating_an_automated_open_wi-fi_traffic_capturing_tool_for_under_20` folder:
+
+* WiFiCap.sh
+
+## Building a Better Screen Locker for GNU/Linux
+
+Author: idk
+
+Files located in `building_a_better_screen_locker_for_gnulinux` folder:
+
+* masterscreen
+* xsidle.sh
+* modify-slock1
+* modify-slock2
+* modify-slock3
+* modify-slock4
+* modify-slock5
+* modify-slock6
+

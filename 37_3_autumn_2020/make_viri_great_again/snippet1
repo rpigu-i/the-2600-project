@@ -1,0 +1,5 @@
+// Change the immediate value in the addl instruction in foo() to 42
+unsigned char *instruction = (unsigned char*)foo_addr + 18;
+*instruction = 0x2A;
+
+

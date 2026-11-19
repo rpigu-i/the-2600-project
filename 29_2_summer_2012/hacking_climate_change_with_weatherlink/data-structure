@@ -1,0 +1,13 @@
+typedef struct {
+ unsigned short bfDfDay:5, bfDfMonth:4, bfDfYear:7;
+ unsigned short uwWriteTime, uwOutTemp, uwHiOutTemp, uwLowOutTemp,
+                uwRainClicks, uwHiRainRate, uwBarometer, uwSolarRad,
+                uwNWindPackets, uwInTemp;
+ unsigned char  ucInHumidity, ucOutHumidity, ucAvgWind, ucHiWind,
+                ucHiWindDir, ucWindDir, ucUvi, ucEt;
+ unsigned short uwHiSolarRad;
+ unsigned char  ucHighUV, ucForecastRule;
+ unsigned short uwLeafTemp, uwLeafWets;
+ unsigned char  uwSoilTemp[4], uwRecordType, uwXHumidity[2], uwXTemp[3], uwSoilMoist[4];
+} DAVISREVBRECORD;
+

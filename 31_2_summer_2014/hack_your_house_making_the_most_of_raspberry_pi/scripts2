@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This first part keeps your browser from switching pages except on my iPhone still looking for a work around there.
+
+echo " No content"
+echo " text/plain"
+echo ""
+
+~/<script for on or off>
+
+# this next part is here to edit my website that lets me know what lights are currently off or on
+sed -i '5s/offbutton/onbutton/' /var/www/index3.html
+

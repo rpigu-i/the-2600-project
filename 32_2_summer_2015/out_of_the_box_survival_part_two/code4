@@ -1,0 +1,8 @@
+[code]
+$script = Get-Content ???.\msg.ps1???
+$bytes = [System.Text.Encoding]::Unicode.GetBytes($script)
+$encodedString = [Convert]::ToBase64String($bytes)
+$encodedString| out-file "msg.b64"
+[/code]
+
+

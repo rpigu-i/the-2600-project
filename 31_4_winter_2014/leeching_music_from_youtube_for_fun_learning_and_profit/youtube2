@@ -1,0 +1,46 @@
+#********** DOWNLOADING VIDEOS/CONVERTING TO MP3 **********
+
+urls = []
+currenturl = "1"
+while currenturl != "":
+  currenturl = raw_input('Enter URL (just hit ENTER to stop and begin downloading): ')
+  if currenturl == "":
+      break
+  urls.append(currenturl)
+
+print ("done with queue entry. Downloading videos from YouTube:")
+time.sleep(3)
+
+count = 1
+for i in urls:
+  if count <= 9:
+      os.system("/usr/local/bin/youtube-dl " + i + " -o 'Track_0" + str(count) + "-_%(title)s.%(ext)s' --restrict-filenames")
+  else:
+      os.system("/usr/local/bin/youtube-dl " + i + " -o 'Track_" + str(count) + "-_%(title)s.%(ext)s' --restrict-filenames")
+  count = count + 1
+
+print ("Finished downloading queue. Finding downloaded videos: ")
+
+downloaded = []
+for file in os.listdir('.'):
+  if file.endswith(".mp4"):
+      print file
+      downloaded.append(file)
+      print ("Here are the found files: ")
+print '[%s]' % ', '.join(map(str, downloaded))
+
+print ("Now converting videos: ")
+time.sleep(3)
+downloaded.sort()
+for x in downloaded:
+  os.system('/usr/local/bin/ffmpeg -i ' + x + " " + x + '.mp3')
+
+print ("Finished converting. Cleaning up: ")
+time.sleep(3)
+
+for file in os.listdir('.'):
+  if file.endswith(".mp4"):
+      print ("Deleting file " + file + "...")
+      os.system("rm " + file)
+
+

@@ -1,0 +1,11 @@
+#********** POST-OPERATION ORGANIZATION **********
+
+name = raw_input("Give a name to the compilation you've made:")
+name = name.replace(" ", "_")
+os.system("mkdir " + name)
+os.system("mv *.mp3 " + name)
+print("Moved MP3 into a folder called " + name + ".")
+print ("All finished. Enjoy! Hit Enter to terminate program.")
+raw_input("")
+
+

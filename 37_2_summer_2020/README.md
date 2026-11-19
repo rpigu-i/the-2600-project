@@ -8,5 +8,27 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Tracking Wi-Fi Devices with Python and GPS
 
-*Code details to be added - check https://www.2600.com/code/372/  for available code listings*
+Author: Columbo
+
+Files located in `tracking_wi-fi_devices_with_python_and_gps` folder:
+
+* wifitrack.py
+
+## Fun with Text to Speech
+
+Author: Nestor
+
+Files located in `fun_with_text_to_speech` folder:
+
+* convert-2600
+
+## The Rise of the Machines - Learning to Detect DGAs
+
+Author: blodgic
+
+Files located in `the_rise_of_the_machines_-_learning_to_detect_dgas` folder:
+
+* machine-learning-code
+

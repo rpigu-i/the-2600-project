@@ -8,5 +8,19 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Serial Number Cracking For Fun and Profit
 
-*Code details to be added - check https://www.2600.com/code/352/  for available code listings*
+Author: MrGhostValley
+
+Files located in `serial_number_cracking_for_fun_and_profit` folder:
+
+* bash-script
+
+## Brute Forcing a Car Door with Math
+
+Author: Br@d
+
+Files located in `brute_forcing_a_car_door_with_math` folder:
+
+* car-door-script
+

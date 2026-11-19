@@ -1,0 +1,15 @@
+Message:
+const-string v0, "HAXOR"
+const-string v1, "Message goes here"
+invoke-static {v0, v1},
+Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+Message w/call stack:
+const-string v0, "HAXOR"
+const-string v1, "Message goes here"
+new-instance v2, Ljava/lang/Throwable;
+invoke-direct {v2}, Ljava/lang/Throwable;-><init>()V
+invoke-static {v0, v1, v2},
+Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+
+

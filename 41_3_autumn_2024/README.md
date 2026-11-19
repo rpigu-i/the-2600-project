@@ -8,5 +8,11 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Hacking the URL Schema
 
-*Code details to be added - check https://www.2600.com/code/413/  for available code listings*
+Author: Tiago EpifÃ¢nio (madcap)
+
+Files located in `hacking_the_url_schema` folder:
+
+* url.py
+

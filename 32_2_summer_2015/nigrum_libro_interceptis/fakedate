@@ -1,0 +1,93 @@
+--- [ fakedate.c
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+/* Declare global state that our hijacked functions use */
+
+int HAVE_OPTS = NULL;	/* have we already checked the environment? */
+int RUN = 0;			/* How many times has gettimeofday() run */
+int NUMCALLS =0;		/* How many times to return a bogus time, 0 = always */
+int DEBUG=NULL;		/* Do we print debugging info? */
+int START_TIME;		/* Remember the time we started */
+time_t MIN = 0;		/* Minimum time value to return */
+time_t MAX = 0;		/* Maximum time value to return */
+
+/* Inspect the environment and set up the global state */
+void loadopts()
+{
+    if (getenv("FAKEDATE_DEBUG"))
+    	  DEBUG=1;
+
+    if (getenv("FAKEDATE_MAX"))
+               MAX=atol(getenv("FAKEDATE_MAX"));
+    else MAX=1;
+
+    if (getenv("FAKEDATE_CALLS"))
+         NUMCALLS=atol(getenv("FAKEDATE_CALLS"));
+    else NUMCALLS=0;
+
+    if (getenv("FAKEDATE_MIN))
+         FAKEDATE_MIN=atol(getenv("FAKEDATE_MIN"));
+    else FAKEDATE_MIN=0;
+
+    __gettimeofday(tv,tz);
+    START_TIME=tv->tv_sec;
+    HAVE_OPTS=1;
+}
+
+int gettimeofday(struct timeval *tv, struct timezone *tz)
+{
+	int ret;
+
+	if (!HAVE_OPTS)
+	   loadopts();
+
+	/* Get the genuine current time */
+	ret=__gettimeofday(tv,tz);
+
+	/* If we're munging the date, we map the time into our interval */
+	if ( (NUMCALLS == 0) || (RUN++ < NUMCALLS) )
+	   tv->tv_sec = MIN + (tv->tv_sec - MIN) % (MAX-MIN);
+
+	if (DEBUG)
+	{
+	   fprintf(stderr, "FakeDate: GetTimeOfDay [%d , %d] ", MIN, MAX);
+	   fprintf(stderr, "(tv->tv_sec = %d) ", tv->tv_sec);
+	   fprintf(stderr, "(%d total calls)\n", NUMCALLS);
+	}
+	return ret;
+}
+
+time_t time(time_t *t)
+{
+	time_t h;
+
+	struct timeval {
+	       long tv_sec;
+	       long tv_usec;
+	} tv;
+
+	struct timezone {
+	       int tz_minuteswest;
+	       int tz_dsttime;
+	} tz;
+
+	gettimeofday(&tv, &tz);
+
+	h=tv.tv_sec;
+
+	if (DEBUG)
+	   fprintf(stderr,"FakeDate: Time() [%d, %d] (Returned %d)\n", 
+	   MIN, MAX, h);
+
+	if (t)
+	   (*t)=h;
+
+	return h;
+}
+
+--- [ end fakedate.c
+
+

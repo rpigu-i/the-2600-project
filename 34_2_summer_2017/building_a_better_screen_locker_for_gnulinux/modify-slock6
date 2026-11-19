@@ -1,0 +1,5 @@
+#if GPGOFF
+if(gpgoff(passwd) == 0){
+running = 0;
+#else
+

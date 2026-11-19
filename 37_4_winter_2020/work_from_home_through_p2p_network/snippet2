@@ -1,0 +1,13 @@
+[Unit]
+Description=SSH P2P Tunnel
+After=network.target
+[Service]
+Restart=always
+RestartSec=20
+User=u
+Environment=TUNTOX_SHARED_SECRET=123123
+ExecStart=/home/u/tuntox/tuntox-x64 -D -C /home/u/tuntox/
+[Install]
+WantedBy=multi-user.target
+
+

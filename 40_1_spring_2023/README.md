@@ -8,5 +8,29 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Organizing Music Files With SongRec and Shazam
 
-*Code details to be added - check https://www.2600.com/code/401/  for available code listings*
+Author: Robin
+
+Files located in `organizing_music_files_with_songrec_and_shazam` folder:
+
+* bash_script
+
+## Known Plaintext Attacks Are Caesar-ous Business
+
+Author: snooze
+
+Files located in `known_plaintext_attacks_are_caesar-ous_business` folder:
+
+* append
+* vigcipher.py
+
+## readme.exe
+
+Author: street
+
+Files located in `readmeexe` folder:
+
+* chatgpt-powershell-script
+* stager-code
+

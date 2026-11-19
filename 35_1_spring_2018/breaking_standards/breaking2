@@ -1,0 +1,5 @@
+head -c 10 COLOURB.PI9 | xxd -p | sed 's/\(.\)\(.
+/\2\1/g' | xxd -r -p
+2600@rules
+
+

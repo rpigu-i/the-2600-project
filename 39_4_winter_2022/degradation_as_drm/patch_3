@@ -1,0 +1,10 @@
+; file offset 0x253C0
+; go to patch_4 hardware check
+E9 67DB6A00 jmp lzdoom_____prot.patch_4
+90 nop
+90 nop
+90 nop
+90 nop
+continue_4: <original game instructions>
+
+

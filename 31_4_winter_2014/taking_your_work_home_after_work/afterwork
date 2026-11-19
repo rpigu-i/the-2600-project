@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+use strict;
+
+my $bytesToIgnore = $ARGV[0];
+my $bytesRead = 0;
+my $fileName = $ARGV[1];
+my $fileOut = $ARGV[2];
+if ($#ARGV != 2){
+print "\nUsage:\n   extract.pl <bytes to ignore> <source> <dest>\n\n";
+}
+
+print "Extracting $fileOut\nIgnoring $bytesToIgnore bytes from $fileName...\n";
+
+open FILE, "<:raw", $fileName or die "Couldn't open $fileName!";
+open FILE2, ">:raw", $fileOut or die "Couldn't open $fileOut!";
+binmode FILE;
+binmode FILE2;
+
+my ($buf, $data, $n); 
+while (($n = read FILE, $data, 1) != 0) {
+$bytesRead++;
+if($bytesRead > $bytesToIgnore) {
+  print FILE2 $data or die "Error writing $fileOut!";
+}
+}
+
+close FILE;
+close FILE2;
+print "$fileOut has been created.\n\n  *** 2014 GerbilByte ***\n\n";
+
+

@@ -1,0 +1,34 @@
+; COM format doesn't have relocation support,
+; so you must to tell the assembler to load it in a specific
+; memory location, the offset 0100h
+org 100h
+
+; this is the binary file section where the data is stored
+; our 'data' is just the 'hello world' string
+section .data
+   hello db 'Hello, World!$', 0
+
+; besides the name (text), this is the section where the actual code is
+section .text
+   ; print the message to the screen
+   ; before 'printing' we must set the parameters first
+
+   ; MOV 9 to the register AH. This means "print string" function
+   mov ah, 9
+   ; Load the offset address of 'hello world' into register DX
+   mov dx, hello
+
+   ; Call the DOS interrupt 21h to execute the function
+   int 21h
+
+   ; Exit the program
+   ; same thing, move the parameters then execute
+
+   ; AH=4Ch means "exit" function
+   mov ah, 4Ch
+   ; Set AL to 0 (return code)
+   xor al, al
+
+   ; Call the DOS interrupt 21h to exit the program
+   int 21h
+

@@ -1,0 +1,43 @@
+#********** LIBRARY IMPORTS **********
+#os for system calls, time for delays so user can read output
+
+import os, time
+
+#********** INSTALLATION AND UPDATES **********
+#This script utilizes ffmpeg, youtube-dl and cdrdao
+
+print("Checking for youtube-dl and FFMpeg...")
+time.sleep(3)
+
+os.system("cd /usr/local/bin")
+if not os.path.exists('/usr/local/bin/youtube-dl'):
+      print("youtube-dl is not installed. Installing now.")
+      time.sleep(3)
+      os.system("sudo wget https://yt-dl.org/downloads/2014.05.12/youtube-dl -O /usr/local/bin/youtube-dl")
+      os.system("sudo chmod a+x /usr/local/bin/youtube-dl")
+      os.system("sudo chmod rwx /usr/local/bin/youtube-dl")
+      print("youtube-dl has been installed.")
+      print("Now updating youtube-dl...")
+      os.system("sudo /usr/local/bin/youtube-dl -U")
+else:
+      print("Checking for update to youtube-dl...")
+      os.system("sudo /usr/local/bin/youtube-dl -U")
+
+if not os.path.exists('/usr/local/bin/ffmpeg'):
+      print("FFMpeg is not installed. Installing now.")
+      time.sleep(3)
+      os.system("sudo wget http://ffmpeg.gusari.org/static/32bit/ffmpeg.static.32bit.latest.tar.gz -O /usr/local/bin/ffmpeg.tar.gz")
+      os.system("sudo tar -zxvf /usr/local/bin/*.tar.gz -C /usr/local/bin")
+      os.system("sudo chmod a+x /usr/local/bin/ffmpeg")
+      os.system("sudo chmod a+x /usr/local/bin/ffprobe")
+      os.system("sudo rm ffmpeg.tar.gz")
+      print("FFMpeg has been installed.")
+else:
+      print("FFMpeg is already installed.")
+
+print("Installing/Updating cdrdao through apt-get. This is for burning to CD-R. Install manually if you do not use apt-get and wish to burn CDs with this program instead of an external one.")
+time.sleep(5)
+os.system("sudo apt-get install cdrdao")
+os.system("clear")
+
+

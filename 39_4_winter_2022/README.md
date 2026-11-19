@@ -8,5 +8,22 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Degradation as DRM
 
-*Code details to be added - check https://www.2600.com/code/394/  for available code listings*
+Author: Nikolaos Tsapakis
+
+Files located in `degradation_as_drm` folder:
+
+* patch_1
+* patch_2
+* patch_3
+* patch_4
+
+## scan.sh
+
+Author: Justin Parrott
+
+Files located in `scansh` folder:
+
+* scan.sh
+

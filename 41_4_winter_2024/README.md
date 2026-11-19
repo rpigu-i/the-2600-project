@@ -8,5 +8,12 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Hidden Injection
 
-*Code details to be added - check https://www.2600.com/code/414/  for available code listings*
+Author: Street
+
+Files located in `hidden_injection` folder:
+
+* powershell
+* additional
+

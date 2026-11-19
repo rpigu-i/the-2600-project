@@ -1,0 +1,5 @@
+usboff();
+gpgon();
+return lock;
+}
+

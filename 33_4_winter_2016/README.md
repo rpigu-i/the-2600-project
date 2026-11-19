@@ -8,5 +8,41 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Can Security Be Built into Pure Data?
 
-*Code details to be added - check https://www.2600.com/code/334/  for available code listings*
+Author: Wyatt Lee
+
+Files located in `can_security_be_built_into_pure_data` folder:
+
+* xml-like-code
+
+## mcquery.js - A Web Scraper for Disc Golf Players
+
+Author: Brenden Hyde
+
+Files located in `mcqueryjs_-_a_web_scraper_for_disc_golf_players` folder:
+
+* mcquery.js
+* package.json
+
+## KBChat - Private, Encrypted Chat via KBFS
+
+Author: Samuel Hofius
+
+Files located in `kbchat_-_private_encrypted_chat_via_kbfs` folder:
+
+* kbchat.sh
+
+## Automatic Contest Winning via Selenium
+
+Author: Kyle Bradshaw
+
+Files located in `automatic_contest_winning_via_selenium` folder:
+
+* code1
+* code2
+* code3
+* code4
+* code5
+* code6
+

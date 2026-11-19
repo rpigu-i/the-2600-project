@@ -1,0 +1,6 @@
+ip nat translation timeout 1200
+ip nat translation tcp-timeout 1200
+ip nat translation udp-timeout 1200
+ip nat translation max-entries all-host 300
+
+

@@ -8,5 +8,23 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Anti-Revisionist Malware
 
-*Code details to be added - check https://www.2600.com/code/431/  for available code listings*
+Author: Mephistolist
+
+Files located in `anti-revisionist_malware` folder:
+
+* one-line-sed
+* malware-bash
+* malware-copy
+* malware-msfvenom
+* malware-base64
+
+## Never Miss Another Episode of Off The Hook
+
+Author: PRD
+
+Files located in `never_miss_another_episode_of_off_the_hook` folder:
+
+* home-assistant
+

@@ -1,0 +1,4 @@
+wget https://geti2p.net/_static/i2p-debian-repo.key.asc
+sudo apt-key add i2p-debian-repo.key.asc
+
+

@@ -1,0 +1,91 @@
+--- [ peekaboo.c
+
+#include <stdio.h> 
+#define __USE_GNU 1 
+#include <unistd.h>
+#include <dlfcn.h> 
+
+#define FILENAME "/tmp/icu.txt"
+
+/* Typedef our function pointers */ 
+typedef void *(*memcpy_t) (void *dest, const void *src, size_t n);
+typedef ssize_t (*read_t) (int FD, void *buf, size_t n);
+typedef char *(*strcpy_t) (char *dest, const char* src);
+typedef char *(*strncpy_t) (char *dest, const char* src, size_t n);
+
+/* Our global file pointer */
+FILE *peekaboofile = NULL;
+
+static void *getfunc(const char *funcName)
+{
+   void *tmp;
+
+   if ((res = dlsym(RTLD_NEXT, funcName)) == NULL) {
+       fprintf(stderr, "error with %s: %s\n", funcName, dlerror());
+       _exit(1);
+   }
+   return tmp;
+}
+
+void ensure-file()
+{
+	if (!peekaboofile)
+	   peekaboofile=fopen(FILENAME, "a");
+}
+
+char *strncpy(char *dest, char *src, size_t n)
+{
+ static strncpy_t real_strncpy = NULL;
+
+ ensure-file();
+ fprintf(peekaboofile, 
+         "STRNCPY: \nSRC: %s\nDST: %s\nSIZE: %d\n------------------------\n", 
+	   src, dest, n);
+ real_strncpy = getfunc("strncpy");
+ return real_strncpy(dest, src, n);
+}
+
+char *strcpy(char *dest, char *src)
+{
+ static strcpy_t real_strcpy = NULL;
+
+ ensure-file();
+ fprintf(peekaboofile, 
+         "STRCPY: \nSRC: %s\nDST: %s\n------------------------\n",
+	   src, dest);
+ real_strcpy = getfunc("strcpy");
+ return real_strcpy(dest, src);
+}
+
+void *memcpy(void *dest, const void *src, size_t n)
+{
+ static memcpy_t real_memcpy = NULL;
+
+ ensure-file()
+ fprintf(peekaboofile, "MEMCPY: : ");
+ fwrite(src, n, 1, stderr);
+ fprintf(peekaboofile, "\nDST: ");
+ fwrite(dest, n, 1, stderr);
+ fprintf(peekaboofile, "\nSIZE: %d\n----------------------\n", n);
+ real_memcpy = getfunc("memcpy");
+ return real_memcpy(dest, src, n);
+}
+
+ssize_t read (int FD, void *buf, size_t n)
+{
+ static read_t real_read = NULL;
+ ssize_t i;
+
+ ensure-file();
+ real_read = getfunc("read");
+ i = real_read(FD, buf, n);
+
+ fprintf(peekaboofile, 
+        "READ:\nFD: %d\nBUF: %s\nSIZE: %d\n-------------------\n", 
+	 FD, buf, n);
+ return i;
+}
+
+--- [ end of peekaboo.c
+
+

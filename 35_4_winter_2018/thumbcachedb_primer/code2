@@ -1,0 +1,7 @@
+import shutil
+# copy a file and then make a new copy 
+# shutil.copyfile(src, dst)
+# copied file name must be different 
+shutil.copyfile('thumbcache.db', 'thumbscopy.db')
+
+

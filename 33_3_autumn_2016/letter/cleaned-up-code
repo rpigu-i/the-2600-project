@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+# read exif data
+# ./thisscript.py <filename>
+
+import sys
+import exifread
+
+filename = "hello.jpg"
+# command line file name
+if len(sys.argv) > 1:
+   filename = sys.argv[1]
+
+#read from the file
+inFile = open(filename,"r")
+tags = exifread.process_file(inFile)
+inFile.close()
+
+#print the tags.
+for tag in tags.keys():
+   print(tag + "\t" + tags[tag])
+
+

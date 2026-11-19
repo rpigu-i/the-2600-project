@@ -1,0 +1,13 @@
+FileReader fr= newFileReader(newFile(programsListing));
+BufferedReader br= newBufferedReader(fr);
+while(br.ready()) {
+ String prg= br.readLine().trim();
+ URL finalURL= newURL("www.a-server.com/findClass?port=6100&p1="+prg);
+ URLConnection conn= finalURL.openConnection();
+ BufferedReader in= newBufferedReader(new InputStreamReader(conn.getInputStream()));
+
+...
+
+Thread.sleep(Integer.parseInt(wait));
+}
+

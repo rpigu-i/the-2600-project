@@ -1,0 +1,59 @@
+#python version 3.6
+#DGA feature building
+
+#entropy
+def entropy(string):
+  #get probability of chars in string
+  prob = [ float(string.count(c)) / len(string) for c in dict.fromkeys(list(string)) ]
+  #calculate the entropy
+  entropy = - sum([p * math.log(p) / math.log(2.0) for p in prob])
+  return entropy
+#apply entropy to the domain
+df['entropy'] = df['domain'].apply(entropy)
+#Additional features
+
+#hyphen count
+df['hyphen_count'] = df.domain.str.count('-')
+#dot count
+df['dot_count'] = df.domain.str.count(r'\.')
+#string length of the full domain
+df['string_len_domain'] = df.domain.str.len()
+#tld length
+df['tld_len'] = df.tld.str.len()
+#count of vowels and consonants
+vowels = set("aeiou")
+cons = set("bcdfghjklmnpqrstvwxyz")
+df['Vowels'] = [sum(1 for c in x if c in vowels) for x in df['domain']]
+df['Consonants'] = [sum(1 for c in x if c in cons) for x in df['domain']]
+#consonents to vowels ratio
+df['consec_vowel_ratio'] = (df['Vowels'] / df['Consonents']).round(5)
+#count the number of syllables in a word
+def syllables(word):
+  word = word.lower()
+  if word.endswith('e'):
+    word = word[:-1]
+  count = len(re.findall('[aeiou]+', word))
+  return count
+df['syllables'] = df['domain'].apply(syllables)
+
+#prediction code
+from xgboost import XGBClassifier
+
+pred = pd.DataFrame(df.data, columns = columns) # load the dataset as a pandas data frame
+y = df.benign_dga # the binary target variable 1 for DGA 0 for benign. This was assigned in the data collection
+#create training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.3)
+
+#fit model
+model = XGBClassifier(objective= 'binary:logistic')
+model.fit(X_train, y_train)
+
+#make predictions for test data
+y_pred = model.predict(X_test)
+predictions = [round(value) for value in y_pred]
+
+# evaluate predictions
+accuracy = accuracy_score(y_test, predictions)
+print("Accuracy: %.2f%%" % (accuracy * 100.0))
+
+

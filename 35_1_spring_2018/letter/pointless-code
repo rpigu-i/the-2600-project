@@ -1,0 +1,13 @@
+var supercalifragilicious = 0;
+function whatis_supercalifragilicious()
+{
+	var supercallifragilicious = 100;
+
+	for(i=0; i < 50; i++)
+		supercalifragilicious++;
+
+	alert("Supercalifragilicious is " + supercalifragilicious);
+}
+whatis_supercalifragilicious();
+
+

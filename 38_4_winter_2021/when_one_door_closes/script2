@@ -1,0 +1,19 @@
+#!/bin/bash
+
+for i in {0..600}
+do
+
+if [ $i -lt 10 ]; then
+curl https://conference.net/896a-aae5d1e4ac3f_960x540p-1.2Mbps-1200000_0000${i}.ts > $i.ts
+elif [ $i -lt 100 ]; then
+curl https://conference.net/896a-aae5d1e4ac3f_960x540p-1.2Mbps-1200000_000${i}.ts > $i.ts
+elif [ $i -lt 1000 ]; then
+curl https://conference.net/896a-aae5d1e4ac3f_960x540p-1.2Mbps-1200000_00${i}.ts > $i.ts
+else
+echo "Something is a miss"
+fi
+
+done
+exit 0
+
+

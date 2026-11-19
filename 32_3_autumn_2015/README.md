@@ -8,5 +8,11 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Unexpected Denial of Service
 
-*Code details to be added - check https://www.2600.com/code/323/  for available code listings*
+Author: J. Savidan
+
+Files located in `unexpected_denial_of_service` folder:
+
+* DoS-code
+

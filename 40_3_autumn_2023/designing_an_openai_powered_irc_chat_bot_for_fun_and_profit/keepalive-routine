@@ -1,0 +1,12 @@
+sub falive {
+ if ($hburl) { ## this makes it so its not mandatory to have it set
+  while (1) {
+   my $uri = URI->new($hburl);
+   my $ua = LWP::UserAgent->new;
+   $ua->post($uri);
+   sleep 30;
+  }
+ }
+}
+
+

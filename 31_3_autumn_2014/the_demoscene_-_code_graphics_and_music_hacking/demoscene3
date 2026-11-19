@@ -1,0 +1,29 @@
+procedure dobump; {Now u guess what this one does..hehehe}
+var difx, {The X axis difference}
+  dify, {The Y axis difference}
+  col:byte; {Used in many points..}
+  l1:integer; {General use}
+begin
+ lx:=160; {The starting position of the light source}
+ ly:=100; {>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>}
+ l1:=0;
+ repeat
+  inc(l1);
+  lx:=round(cos(l1/13)*66+160);
+  ly:=round(sin(l1/23)*66+100);
+  {^^^^ those two make sure the light moves in a nice round path..}
+  for x:=1 to 319 do
+   for y:=1 to 190 do begin
+   {This is where the important stuff is done}
+   {Here we will light the point x,y if lx,ly is the light position}
+
+    vlx:=x-lx; {Calculate the L vector}
+    vly:=y-ly; {>>>>>>>>>>>>>>>>>>>>>>}
+
+    if (vlx<130) and (vlx>-130) and (vly>-130) and (vly<130 ) then begin
+    {This is some stupid way to gain speed.. if the light vector is too
+    far away from the point we want to light then don't bother..it
+    will probably get no light..}
+     nx:=mem[vaddr:x+y*320+1]-mem[vaddr:x+y*320-1];
+     ny:=mem[vaddr:x+(y+1)*320]-mem[vaddr:x+(y-1)*320];
+

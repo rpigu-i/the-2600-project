@@ -1,0 +1,15 @@
+5 call clear
+10 Print "Abstract Color Portrait Program"
+20 Print "By Diana - 1980-2019 - Use Allowed Under Creative Commons (Citation)"
+30 Print
+40 For i= 1 to 15
+50 call color(i, I, I)
+60 next I
+70 For i=1 to 24
+80 For j=1 to 32
+90 idx=int(rnd*14+1)
+100 call hchar(i,j,32+idx*8)
+110 next j
+120 next I
+
+

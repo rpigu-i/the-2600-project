@@ -1,0 +1,7 @@
+```
+cd ros2_ws/src
+git clone https://github.com/stella-cv/stella_vslam.git
+cd ..
+colcon build --symlink-install
+```
+

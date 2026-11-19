@@ -1,0 +1,15 @@
+$content = file_get_contents($feed_url);
+$x = new SimpleXmlElement($content); 
+    foreach($x->channel->item as $entry) {
+	if ($limit<5){ 
+	$myRand=rand(1,3);
+	if ($myRand==1)
+			
+			$preNews="Read this headline: ";
+	} 
+	$arrOut[$i][0]=$preNews.utf8_decode($entry->title);
+	$i++;
+	$limit++;
+	}
+    }
+

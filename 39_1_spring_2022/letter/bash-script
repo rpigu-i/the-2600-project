@@ -1,0 +1,18 @@
+#!/bin/bash
+PLAYLIST_FILE=`mktemp`
+TEMP_FILE=`mktemp`
+curl -s -L --compressed --retry 3 "${1}" -o "${PLAYLIST_FILE}"
+BASE_PATH=`echo "$1" | sed 's|\(.*\)/.*|\1|'`/
+while IFS= read -r INPUT_LINE
+do
+ if [ "${INPUT_LINE:0:1}" != "#" ]
+ then
+curl -s -L --compressed --retry 3 "${BASE_PATH}${INPUT_LINE}" -o
+"${TEMP_FILE}"
+  cat "${TEMP_FILE}" >> "${2}"
+  rm "${TEMP_FILE}"
+ fi
+done < "${PLAYLIST_FILE}"
+rm "${PLAYLIST_FILE}"
+
+

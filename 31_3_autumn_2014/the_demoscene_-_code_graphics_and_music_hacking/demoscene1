@@ -1,0 +1,20 @@
+void zBuffer(void)
+{
+ int x,y;
+ for(y=0;y<YMAX;y++){ /* Clear frame buffer and z-buffer */
+  for(x=0;x<XMAX;x++){
+   WritePixel(x,y,BACKGROUND_VALUE);
+   WriteZ(x,y,0);
+  }
+ }
+ for(each polygon){ /* Draw polygons */
+  for(each pixel in polygon's projection){
+   double pz=polygon's z-value at pixel coords(x,y);
+   if(pz>ReadZ(x,y){ /* New point is not farther */
+     WriteZ(x,y,pz);
+     WritePixel(x,y,polygon's color at pixel coords (x,y))
+      }
+  }
+ }
+} /* z-buffer */
+

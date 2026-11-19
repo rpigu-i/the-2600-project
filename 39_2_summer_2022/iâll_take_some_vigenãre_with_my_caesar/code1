@@ -1,0 +1,18 @@
+import string
+alpha = string.ascii_lowercase
+
+plainText = input("Enter your plaintext to be encrypted: ")
+userKey = input("Enter your alphabetical key; exits on invalid character: ")
+cipherText = ''
+
+# Check validity of key; for demonstration purposes I only accept alphabet characters
+
+for char in userKey:
+ if char.lower() not in alpha:
+  print("Invalid key; quitting.")
+  quit()
+ else:
+  rot = alpha.index(char)
+  print(rot)
+
+

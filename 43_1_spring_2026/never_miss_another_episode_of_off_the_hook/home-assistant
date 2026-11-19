@@ -1,0 +1,46 @@
+```
+# $PATH_TO_HOME_ASSISTANT/config/scripts.yml
+play_wbai:
+  sequence:
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.home_assistant_voice_XYZ_media_player # CHANGE THIS TO YOUR MEDIA PLAYER'S ID
+    data:
+      media_content_id: media-source://radio_browser/8a6619b5-5fcd-451e-ac93-fb23f23326d5
+      media_content_type: audio/mpeg
+    metadata:
+      title: WBAI 99.5 New York, NY
+      thumbnail: https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.ZZ1h8MCvZJLe1bvx8s77JAHaHa%26pid%3DApi&f=1&ipt=721c7e8b5d7467ffe34b5934d7679a7fc7ed528bbdca21274d7dea65c563fa30&ipo=images
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+       media_content_id: media-source://radio_browser
+      - media_content_type: music
+       media_content_id: media-source://radio_browser/tag
+      - media_content_type: music
+       media_content_id: media-source://radio_browser/tag/community radio
+  alias: Play WBAI
+  description: 'Play WBAI web stream'
+```
+
+```
+# $PATH_TO_HOME_ASSISTANT/config/automations.yml
+- id: '1745667821224' # YOU SHOULD BE ABLE TO USE THIS BUT YMMV
+  alias: Play WBAI on Wednesday at 7:00 PM Eastern
+  description: 'Play WBAI on Wednesday at 7:00 PM Eastern'
+  triggers:
+  - at: '19:00:00' # MODIFY THIS TO ACCOUNT FOR YOUR LOCAL TIME
+    trigger: time
+  conditions:
+  - condition: time
+    weekday:
+    - wed
+  actions:
+  - action: script.play_wbai
+    metadata: {}
+    data: {}
+  mode: single
+```
+

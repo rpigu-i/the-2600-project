@@ -1,0 +1,6 @@
+in assembly(32bit, Linux):   in C:               in PHP:
+mov eax, 1                   int x=1;            $x = 1;
+mov ebx, 2                   int y=2;            $y = 2;
+cmp eax, ebx                 if(x<>y){           if($x<>$y){
+jne not_equal_function       goto not_equal; }   not_equal_func(); }
+

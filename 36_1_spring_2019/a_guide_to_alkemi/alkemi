@@ -1,0 +1,26 @@
+void rotateArrayLeftAsBits(ref byte[] inB)
+ {
+  if (inB.Length == 0) return; 
+  byte[] outB = new byte[inB.Length];
+  byte[] bits = new byte[inB.Length];
+
+  int i;
+  for (i = 0; i < inB.Length; i++)
+  {
+   if ((inB[i] & 0x80) == 0x80)
+    bits[i] = 1; //save the high bit for later
+   outB[i] = (byte)(inB[i] << 1); //SHIFT LEFT ONE
+
+  }
+
+  //now add in the saved high bits
+  for (i = 1; i < inB.Length; i++)
+   outB[i - 1] |= bits[i];
+  outB[inB.Length - 1] |= bits[0];
+
+  //copy back into inB
+  System.Buffer.BlockCopy(outB, 0, inB, 0, inB.Length);
+
+ }
+
+

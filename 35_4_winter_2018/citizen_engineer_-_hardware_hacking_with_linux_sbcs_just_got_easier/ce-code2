@@ -1,0 +1,31 @@
+import time
+import gpiod
+
+# the name of the GPIO peripheral, almost always gpiochip0
+CHIP = "gpiochip0"
+# this is the 'offset' for the chip, e.g. Raspi GPIO #18 is pin number 18
+PIN = 18
+# Connect a ~10K pullup resistor from this pin to 3.3V (or whatever your logic is)
+
+# Open the chip
+with gpiod.Chip(CHIP) as chip:
+ # get control of the GPIO
+ line = chip.get_line(PIN)
+ # set the pin to be an input, the consumer string can be anything
+ line.request(consumer="button.py", type=gpiod.LINE_REQ_DIR_IN)
+ # we'll keep track of the last button state, so we print changes
+ last_button_status = line.get_value()
+ while True:
+ # read the line
+ line_status = line.get_value()
+ # did the state change?
+ if line_status != last_button_status:
+  # print what happened!
+  if line_status:
+   print("button just released")
+  else:
+   print("button just pressed")
+  last_button_status = line_status
+ time.sleep(0.01) # De-bounce buttons by putting a light delay
+
+

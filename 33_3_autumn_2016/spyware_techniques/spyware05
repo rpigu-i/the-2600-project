@@ -1,0 +1,28 @@
+DataSet ds = new DataSet();
+ds.Tables.Add("Contacts");
+ds.Tables[0].Columns.Add("Email");
+ds.Tables[0].Columns.Add("FirstName");
+ds.Tables[0].Columns.Add("LastName");
+
+Microsoft.Office.Interop.Outlook.Items OutlookItems;
+Microsoft.Office.Interop.Outlook.Application outlookObj; 
+Microsoft.Office.Interop.Outlook.MAPIFolder Folder_Contacts;
+
+
+outlookObj = new Microsoft.Office.Interop.Outlook.Application();
+Folder_Contacts = (Microsoft.Office.Interop.Outlook.MAPIFolder)outlookObj.Session.GetDefaultFolder(Microsoft.Office.Interop.Outlook.01DefaultFolders.olFolderContacts);
+OutlookItems = Folder_Contacts.Items;
+
+for (int i = 0; i < OutlookItems.Count; i++)
+
+{
+     Microsoft.Office.Interop.Outlook.Contactltem contact = (Microsoft.Office.Interop.Outlook.ContactItem)OutlookItems[i + 1];
+     DataRow dr = ds.Tables[0].NewRow();
+     dr[0] = contact.EmaillAddress;
+     dr[1] = contact.FirstName;
+     dr[2] = contact.LastName;
+
+     ds.Tables[0].Rows.Add(dr);
+
+}
+

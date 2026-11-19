@@ -8,5 +8,24 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Designing an OpenAI Powered IRC Chat Bot for Fun and Profit
 
-*Code details to be added - check https://www.2600.com/code/403/  for available code listings*
+Author: oxagast
+
+Files located in `designing_an_openai_powered_irc_chat_bot_for_fun_and_profit` folder:
+
+* main-called-routine
+* calls-api
+* resolve
+* html-stripping-routine
+* keepalive-routine
+* additional
+
+## Cute App, But Iâll Use My Own
+
+Author: pax
+
+Files located in `cute_app_but_iâll_use_my_own` folder:
+
+* code.sh
+

@@ -1,0 +1,24 @@
+import subprocess
+
+def change_mac(interface, new_mac):
+    print(f"Changing MAC address of {interface} to {new_mac}")
+
+    # Disable the network interface
+    subprocess.call(["ifconfig", interface, "down"])
+
+    # Change the MAC address
+    subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
+
+    # Enable the network interface
+    subprocess.call(["ifconfig", interface, "up"])
+
+# Example usage
+
+# Replace with your actual network interface name
+interface_name = "eth0"
+
+# Replace with the desired MAC address
+new_mac_address = "00:11:22:33:44:55"
+
+change_mac(interface_name, new_mac_address)
+

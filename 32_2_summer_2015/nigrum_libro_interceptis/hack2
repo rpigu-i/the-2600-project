@@ -1,0 +1,32 @@
+--- [ hack2.c
+
+/* Utility function to return the pointer to a function named by a string */
+static void *getfunc(const char *funcName)
+{
+   void *tmp;
+
+   if ((res = dlsym(RTLD_NEXT, funcName)) == NULL) {
+       fprintf(stderr, "error with %s: %s\n", funcName, dlerror());
+       _exit(1);
+   }
+   return tmp;
+}
+
+/* Typedef ourselves a function pointer compatible with strcmp() */
+typedef char *(*strcmp_t) (char *a, const char* b);
+
+/* A new strcmp() which only returns 0 if its arguments are "red" and "black" otherwise it returns the true string comparison */
+int strcmp(char **a, char **b)
+{
+	static strcmp_t old_strcmp = NULL;
+
+	/* Set up old_strcmp as a name for the real strcmp() function */
+	old_strcmp = getfunc("strcmp");
+
+	if ((!old_strcmp("red", a)) && (!old_strcmp("black", b)))
+	   return 0;
+
+	return old_strcmp(a, b);
+}
+
+

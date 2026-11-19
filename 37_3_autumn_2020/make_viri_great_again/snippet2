@@ -1,0 +1,8 @@
+// Make a random number
+srand(time(NULL));
+unsigned int r = rand();
+// Change the immediate value in the addl instruction in foo() to a random number
+unsigned char *instruction = (unsigned char*)foo_addr + 18;
+*instruction = r;
+
+

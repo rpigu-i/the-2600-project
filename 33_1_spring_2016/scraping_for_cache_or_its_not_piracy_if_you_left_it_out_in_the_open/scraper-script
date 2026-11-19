@@ -1,0 +1,54 @@
+echo "Downloading book..."
+
+# Initialize total downloaded count.
+DLT=0
+
+echo "Creating downloads directory (./apush-dl)"
+# Create downloads directory and redirect stderr to /dev/null (in case the directory already exists).
+mkdir ./apush-dl/ 2>/dev/null
+
+# There are 32 chapters.
+for CHAP in {1..32}; do
+	# There are never more than 7 sections per chapter.
+	for SECT in {1..7}; do
+		# We want to test whether the file is available first before attempting to download, so we grab the HTTP response code first.
+		# We also randomize the useragent somewhat in order to appear less like a script.
+		RESCODE="$(curl -o /dev/null --silent --head --write-out '%{http_code}' "https://webcache.googleusercontent.com/search?q=cache:dev6.mhhe.com/textflowdev/genhtml/0077379578/$CHAP.$SECT.htm" -A "Mozilla/5.0 (Linux; U; Android 4.2.2; en-us; AppleWebKit/$SECT$CHAP.$CHAP (KHTML, like Gecko) Version/$CHAP.$SECT$SECT Mobile Safari/$SECT$CHAP$SECT.$CHAP$CHAP $CHAP-$SECT")"
+		echo "Downloading Chapter $CHAP Section $SECT:"
+		# Make sure we get a 200 response before downloading.
+		if [[ $RESCODE == "200" ]]; then
+			# And download the page (once again, ensuring that the UA appears somewhat unqiue).
+			curl --progress-bar -o "./apush-dl/$CHAP.$SECT.html" "https://webcache.googleusercontent.com/search?q=cache:dev6.mhhe.com/textflowdev/genhtml/0077379578/$CHAP.$SECT.htm" -A "Mozilla/5.0 (Linux; U; Android 4.2.2; en-us; AppleWebKit/$SECT.$CHAP (KHTML, like Gecko) Version/$CHAP.$SECT$SECT Mobile Safari/$SECT$CHAP$SECT.$CHAP$CHAP $CHAP-$SECT"
+			# Increment total downloaded by 1.
+			DLT=$(($DLT+1))
+		else
+			# Otherwise, display an error. 302 usually means that Google has begin blocking requests.
+			echo "Got an error! Code: $RESCODE"
+		fi
+	done
+done
+
+# Delete any files containing the string "Error 404", which would be unique to Google's error pages.
+echo "Deleting 404 files..."
+find ./apush-dl/ -type f -exec egrep -Il 'Error 404' {} \; | xargs rm -v -f
+
+# Append CSS to each file to hide the annoying Google Cache info banner.
+echo "Hiding cache info banner..."
+for file in ./apush-dl/*.html; do echo "<style>#google-cache-hdr{display:none!important}</style>">>"$file"; done
+
+echo -e "Downloaded $DLT pages in total. \n"
+
+# Compile all HTML files into a single PDF for ease of use and transport.
+# Load no images, as the src files are not available from the original dev servers. 
+# This depends on the wonderful wkhtmltopdf utility, from http://wkhtmltopdf.org/.
+read -p "Create PDF of book? (requires wkhtmltopdf) " -n 1 -r
+echo -e "\n"
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	echo "Compiling PDF..."
+	wkhtmltopdf --no-images `find ./apush-dl/* | sort -n | grep html` apush_book.pdf
+fi
+
+echo "All done!"
+
+

@@ -1,0 +1,16 @@
+# PowerShell MAC Spoofing Script
+$adapterName = "Ethernet"
+
+# Replace with your actual adapter name
+$newMac = "00:11:22:33:44:55"
+
+# Replace with the desired MAC address
+# Disable the network adapter
+Disable-NetAdapter -Name $adapterName
+
+# Change the MAC address
+Set-NetAdapter -Name $adapterName -MacAddress $newMac
+
+# Enable the network adapter
+Enable-NetAdapter -Name $adapterName
+

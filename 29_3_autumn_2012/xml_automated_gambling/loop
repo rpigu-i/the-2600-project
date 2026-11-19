@@ -1,0 +1,27 @@
+$i = $plays; // number of plays
+
+while($i > 0) {
+
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+  curl_setopt($ch, CURLOPT_COOKIE, "***COOKIE DATA GOES HERE***");
+  curl_setopt($ch, CURLOPT_URL,"***BUILD URL REQUEST HERE***");
+  $xmlData = curl_exec($ch);
+  curl_close($ch);
+  $xml = simplexml_load_string($xmlData);
+  // Pull results from the XML
+  $win = $xml->ShowGambleResultEvent[grossWin];
+  $balance = $xml->ShowGambleResultEvent[balance];
+
+  if($win > 0) {
+
+    mysql_query("INSERT INTO results (result, balance, wager) VALUES ('WIN', ".$balance.", ".$wager.")");
+
+  } else {
+
+    mysql_query("INSERT INTO results (result, balance, wager) VALUES ('LOSE', ".$balance.", ".$wager.")");
+
+    }
+
+  $i-;
+  }

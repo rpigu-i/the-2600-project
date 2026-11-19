@@ -1,0 +1,5 @@
+#!/bin/bash
+sleep 30
+/usr/bin/autossh -M 9090 -R 9091:localhost:22 user@myremotebox
+
+

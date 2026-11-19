@@ -1,0 +1,9 @@
+$logontime = Get-Content c:\windows\date.txt
+$currenttime = get-date -format u
+$timespan = (New-TimeSpan -Start $logontime -End $currenttime).TotalDays
+if ($timespan -gt 8) {
+  New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "ForceUnlockLogon" -Value "1" -PropertyType DWORD -Force | Out-Null
+  New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "CachedLogonsCount" -Value "0" -PropertyType String -Force | Out-Null
+}
+
+

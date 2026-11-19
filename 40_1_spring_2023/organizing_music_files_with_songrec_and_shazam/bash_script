@@ -1,0 +1,88 @@
+#!/bin/bash
+TIMEOUT=10
+
+function renameSong() {
+  fullSongPath=$1
+  songFileBaseName=$(basename "${fullSongPath}")
+  songFileExtension="${songFileBaseName##*.}"
+  if [ "${songFileExtension}" == "mp3" ]; then
+    if [ -f ${fullSongPath} ]; then
+      echo "Trying to recognize song: ${fullSongPath}"
+      songRecOutput=$(timeout ${TIMEOUT} songrec recognize "${fullSongPath}" --csv)
+      if [ $? -eq 0 ]; then
+        songRecOutput=$(echo -e "${songRecOutput}" | tail -1)
+        parsedMetaData=$(parseMetaData ${songRecOutput})
+        readarray -d "|" -t parsedMetaDataParts <<< "${parsedMetaData}"
+        newSongPath="$(dirname ${fullSongPath})/${parsedMetaDataParts[0]}/${parsedMetaDataParts[1]}"
+        mkdir -p "${newSongPath}"
+        songName=$(echo ${parsedMetaDataParts[2]} | tr -d '\n')
+        mv -f "${fullSongPath}" "${newSongPath}/${songName}.${songFileExtension}"
+      else
+        echo "Failed to recognize song within ${TIMEOUT} seconds. Skipping"
+      fi
+    else
+      echo "Failed to find song: ${fullSongPath}"
+    fi
+    echo "-------------------------------------------------------"
+  else
+    echo "The following extension is not supported: ${songFileExtension}. Skipping"
+  fi
+}
+
+function trim() {
+  var="$*"
+  var="${var#"${var%%[![:space:]]*}"}"
+  var="${var%"${var##*[![:space:]]}"}"
+  printf '%s' "${var}"
+}
+
+function fetchCsvPart() {
+  text=$1
+  csvPartNr=$2
+  csvPart=$(echo "${text}" | awk -v idx="${csvPartNr}" '
+    BEGIN {
+      FPAT = "([^,]*)|(\"[^\"]+\")"
+    }
+    {
+      printf("%s", $idx)
+    }
+  ')
+  echo "${csvPart//\"/}"
+}
+
+function parseMetaData() {
+  metaData=$1
+  albumName=$(fetchCsvPart "${metaData}" "2")
+  artistAndSongName=$(fetchCsvPart ${metaData} "1")
+  readarray -d "-" -t artistAndSongNameParts <<< "${artistAndSongName}"
+  artistName=$(trim "${artistAndSongNameParts[0]}")
+  songName=$(trim "${artistAndSongNameParts[1]}")
+  songName="${songName//[\/]/_}"
+  if [ "${artistName}" == "" ]; then
+    artistName="Unknown"
+  fi
+  if [ "${albumName}" == "" ]; then
+    albumName="Unknown"
+  fi
+ echo "${artistName}|${albumName}|${songName}"
+}
+
+#main
+IFS=$(echo -en "\n\b")
+if [ $# -gt 0 ]; then
+  fsArg=$(realpath $1)
+  if [ -f "${fsArg}" ]; then
+    renameSong "${fsArg}"
+  elif [ -d ${fsArg} ]; then
+    songFilePaths=$(find ${fsArg} -maxdepth 1 -mindepth 1 -type f -exec readlink -f {} \;)
+    for songFilePath in ${songFilePaths}; do
+      renameSong ${songFilePath}
+    done
+  else
+    echo "The provided argument does not seem to be a valid file or directory: ${fsArg}"
+  fi
+else
+  echo "Please provide either a song file name or a directory containing one or more song files"
+fi
+
+

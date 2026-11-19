@@ -1,0 +1,40 @@
+// Release the gpg keys and unmount the encfs data store
+static void
+gpgon(void){
+#if GPGOFF
+// This resets the GPG agent when the screen is locked.
+char *args[] = { "masterscreen", NULL };
+execvp(args[0], args);
+#else
+return;
+#endif
+}
+
+// Re-add the GPG keys and re-mount the encfs encrypted store.
+static int
+gpgoff(const char *password){
+#if GPGOFF
+// This function checks the password from the Screen Locker against the symmetric file.
+// If it succeeds, then the screen will be unlocked and the key will be added to the gpg-agent.
+char buf[128];
+int i = 0;
+char *args[] = { "masterscreen", "masterscreen@localhost", &password, NULL };
+FILE *p = popen(&args, "r");
+if (p != NULL ){
+while (!feof(p) && (i < 128) ){
+fread(&buf[i++],1,1,p);
+}
+buf[i] = 0;
+if(strstr(buf, "failure")) {
+return -1;
+}
+pclose(p);
+return 0;
+}else{
+return -1;
+}
+#else
+return;
+#endif
+}
+

@@ -1,0 +1,20 @@
+# first we define our machine code sequence
+machine_code = (
+    b"\xB4\x09" # mov ah, 9
+    b"\xBA\x10\x01" # mov dx, [message offset]
+    b"\xCD\x21" # int 21h
+    b"\xB4\x4C" # mov ah, 4Ch
+    b"\x30\xC0" # xor al, al
+    b"\xCD\x21" # int 21h
+    b"\x00\x00\x00" # padding, aligning the message bytes
+    # Message with DOS string terminator ($)
+    b"\x48\x65\x6C\x6C\x6F\x2C\x20\x57\x6F\x72\x6C\x64\x21\x24\x00"
+)
+
+fn = "hello-manual.com"
+
+# now we write that sequence of bytes into a binary file: "wb"
+with open(fn, "wb") as f:
+    f.write(machine_code)
+
+print(f"DOS .com file '{fn}' created successfully.")

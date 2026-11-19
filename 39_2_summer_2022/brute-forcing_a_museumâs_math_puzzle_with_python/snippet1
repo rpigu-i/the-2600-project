@@ -1,0 +1,5 @@
+from itertools import permutations
+one_thru_nine = list(range(1, 10))
+all_perms = list(permutations(one_thru_nine))
+
+

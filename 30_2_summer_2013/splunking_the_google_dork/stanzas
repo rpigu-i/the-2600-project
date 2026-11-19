@@ -1,0 +1,20 @@
+file: /opt/splunk/etc/system/local/props.conf
+
+[google_dorking]
+CHECK_FOR_HEADER = false
+SHOULD_LINEMERGE = TRUE
+pulldown_type = 1
+TRANSFORMS-headerToNull = google-dork-null-header
+REPORT-extractFields = google-dork-field-extract
+
+file: /opt/splunk/etc/system/local/transforms.conf
+
+[google-dork-null-header]
+REGEX = ^\#\#.*$
+DEST_KEY = queue
+FORMAT = nullQueue
+
+[google-dork-field-extract]
+DELIMS="\t"
+FIELDS=time,query_set,category,search_string,title,url,display_link,cache_id,snippet
+

@@ -1,0 +1,33 @@
+#prediction code
+X = dataframe.filter(['feature1', 'feature2','feature3','feature4','feature5')]
+y = dataframe.filter(['dependent_variable'])
+
+import sklearn and train,test and split packages
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# logistic regression is the prediction algorithm of choice
+from sklearn.linear_model import LogistricRegression
+from sklearn import metrics
+logreg = LogisticRegression()
+logreg.fit(X_train, y_train)
+
+#Determine the accuracy of model 
+From sklearn.metrics import accuracy_score
+Logreg.fit(X_train, y_train)
+Predictions = logreg.predict(X_test)
+accuracy = accuracy_score(y_test, predictions)
+
+#scoring the model
+print('Accuracy score: ' )
+print(accuracy)
+
+#cross validation matrix for accuracy 
+confusion_matrix = confusion_matrix(y_test, predictions)
+print(confusion_matrix)
+fig, ax – plot_confusion_matrix(conf_mat=confusion_matrix)
+plt.show()
+print ('#TRUES POSITIVE | FALSE POSITIVE')
+print('FALSE NEGATIVE | #TRUE NEGATIVE')
+
+

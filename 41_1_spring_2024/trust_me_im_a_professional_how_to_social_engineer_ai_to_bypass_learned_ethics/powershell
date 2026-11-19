@@ -1,0 +1,35 @@
+powershell
+
+# Load Microsoft Word
+$word = New-Object -ComObject Word.Application
+$word.Visible = $false
+
+# Define a function to search for credit card numbers
+Function FindCreditCardNumbers($docPath) {
+    $doc = $word.Documents.Open($docPath)
+    $content = $doc.Content.Text
+    $doc.Close()
+
+    $regex = "\b(?:\d[ -]*?){13,16}\b"
+    $matches = [regex]::Matches($content, $regex)
+
+    $matches | ForEach-Object {
+        Write-Output $_.Value
+    }
+}
+
+# Specify the directory containing .docx files
+$directory = "C:\path\to\docx\files"
+
+# Get a list of .docx files
+$files = Get-ChildItem -Path $directory -Filter *.docx
+
+# Iterate through the files and search for credit card numbers
+foreach ($file in $files) {
+    FindCreditCardNumbers $file.FullName
+}
+
+# Clean up and close Word
+$word.Quit()
+[System.Runtime.Interopservices.Marshal]::ReleaseComObject($word) | Out-Null
+

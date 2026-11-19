@@ -1,0 +1,7 @@
+import selenium
+from selenium.webdriver.common.keys import Keys
+# This is so we can press the Enter key later.
+
+driver = selenium.webdriver.Firefox()
+Driver.get("https://account.xbox.com/en-us/paymentandbilling/redeemcode/")
+

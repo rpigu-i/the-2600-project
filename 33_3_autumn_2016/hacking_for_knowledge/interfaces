@@ -1,0 +1,22 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+# The primary network interface
+auto eth0
+iface eth0 inet static
+	address 192.168.0.2
+	netmask 255.255.255.0
+	network 192.168.0.0
+	broadcast 192.168.0.255
+	gateway 192.168.0.1
+	dns-nameservers 192.168.0.1, 8.8.8.8 
+# IPTable rules
+post-up iptables-restore < /etc/iptables.up.rules
+# The secondary network interface internal
+auto eth1
+iface eth1 inet static
+	address 192.168.1.2
+	netmask 255.255.255.0
+	network 192.168.1.0
+	broadcast 192.168.1.255
+

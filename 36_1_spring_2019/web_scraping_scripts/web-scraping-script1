@@ -1,0 +1,30 @@
+#!/bin/bash
+
+NAME="AD"
+CHECKFILE="/mnt/nbib24_ad_temp.html"
+NEWFILE="/tmp/nbib24_ad_new.html"
+DIFFFILE="/mnt/diff_ad.txt"
+CURL="curl 'http://www1.onleihe.de/nbib24/frontend/simpleMediaList,0-0-0-109-0-0-0-2004-0-362651610-0.html#titlelist' -s -H 'Host: www1.onleihe.de' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:59.0) Gecko/20100101 Firefox/59.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H 'Accept-Language: de,en-US;q=0.7,en;q=0.3' --compressed -H 'Referer: http://www1.onleihe.de/nbib24/frontend/simpleMediaList,0-0-0-109-0-0-0-0-0-400750299-0.html' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' --data 'SK=2004'"
+
+# If $CHECKFILE is available, download current and check against checkfile
+if [ -f $CHECKFILE ]; then
+        $CURL | grep '>Titel:' > $NEWFILE
+        diff $CHECKFILE $NEWFILE > /mnt/video/$DIFFFILE
+        RESULTDIFF=$(diff -q $CHECKFILE $NEWFILE)
+
+        if [ $? -ne 0 ]; then
+                /usr/local/bin/push.sh "Nbib24 ${NAME} Match"
+                cp $NEWFILE $CHECKFILE
+        fi
+# otherwise download new and send push
+else
+        $CURL | grep '>Titel:' > $CHECKFILE
+        /usr/local/bin/push.sh "Nbib24 ${NAME} Match"
+fi
+
+# Delete temp file
+if [ -f $NEWFILE ]; then
+        rm $NEWFILE
+fi
+
+

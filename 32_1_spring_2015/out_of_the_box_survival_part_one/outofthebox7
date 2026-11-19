@@ -1,0 +1,2 @@
+Get-Content ".\name.log"
+

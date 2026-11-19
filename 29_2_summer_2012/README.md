@@ -8,5 +8,51 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Firewall Your iPhone
 
-*Code details to be added - check https://www.2600.com/code/292/  for available code listings*
+Author: Lomika
+
+Files located in `firewall_your_iphone` folder:
+
+* pf.conf
+
+## Hacking Climate Change With WeatherLink
+
+Author: Cap'n Zilog
+
+Files located in `hacking_climate_change_with_weatherlink` folder:
+
+* data-structure
+
+## Baofeng UV-3R: The Cheapest Dual-Band Ham Radio HT
+
+Author: l0cke
+
+Files located in `baofeng_uv-3r_the_cheapest_dual-band_ham_radio_ht` folder:
+
+* settings.ini
+
+## Firewall Your iPhone
+
+Author: Lomika
+
+Files located in `firewall_your_iphone` folder:
+
+* pf.conf
+
+## Hacking Climate Change With WeatherLink
+
+Author: Cap'n Zilog
+
+Files located in `hacking_climate_change_with_weatherlink` folder:
+
+* data-structure
+
+## Baofeng UV-3R: The Cheapest Dual-Band Ham Radio HT
+
+Author: l0cke
+
+Files located in `baofeng_uv-3r_the_cheapest_dual-band_ham_radio_ht` folder:
+
+* settings.ini
+

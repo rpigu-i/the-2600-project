@@ -1,0 +1,44 @@
+#!/bin/bash
+
+START=${START:-2000}
+END=${END:-4999}
+# call like this to adjust defaults
+# START=2000 END=2001 bash hunter-gatherer.sh
+
+echo -e "Good Serialz:\n" > good_serialz.txt
+
+
+save_if_good () {
+  local this_serial="${1"  
+
+  curl -sL "https://www.cannprove.com/prove/${this_serial}" \
+    | grep -q 'CannProven!' \
+    && echo ${this_serial} >> good_serialz.txt
+}
+
+wait_for_jobs_to_complete () {
+  for job in `jobs -p`;do
+    wait $job
+  done
+}
+
+for num in `seq ${START} ${END}`; do
+  time=$(date +"%T")
+  echo "$time: Downloading Set 10$num"
+
+  for a in {A..Z}; do
+    for b in {A..Z}; do
+      this_serial="10${num}${a}${b}"
+
+      save_if_good "${this_serial}" &
+    done
+    wait_for_jobs_to_complete
+  done
+  # remove for more parallelisim (probably blow up your system file handle limits)
+  wait_for_jobs_to_complete
+done
+wait_for_jobs_to_complete
+
+cat good_serialz.txt
+
+

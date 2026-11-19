@@ -1,0 +1,7 @@
+; file offset 0x281FD6
+; goto patch_2 player cheat string input event check
+E9290F4500 jmp lzdoom_____prot.patch_2
+90 nop
+continue_2 : <original game instructions>
+
+

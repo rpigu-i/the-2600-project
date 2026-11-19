@@ -1,0 +1,22 @@
+import time
+import gpiod
+
+# the name of the GPIO peripheral, almost always gpiochip0
+CHIP = "gpiochip0"
+# this is the 'offset' for the chip, e.g. Raspi GPIO #18 is pin number 18
+PIN = 18
+
+# Open the chip
+with gpiod.Chip(CHIP) as chip:
+ # get control of the GPIO
+ line = chip.get_line(PIN)
+ # set the pin to be an output, the consumer string can be anything
+ line.request(consumer="blinky.py", type=gpiod.LINE_REQ_DIR_OUT)
+ # Toggle!
+ while True:
+ Line.set_value(1) # LED ON
+ Time.sleep(0.1)   # wait 100ms
+ Line.set_value(0) # LED OFF
+ Time.sleep(0.1)   # wait 100ms
+
+

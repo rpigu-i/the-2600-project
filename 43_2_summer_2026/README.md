@@ -8,5 +8,11 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## The V6 Network Speaks First (Observation Is Reconnaissance Without Fingerprints)
 
-*Code details to be added - check https://www.2600.com/code/432/  for available code listings*
+Author: Splat
+
+Files located in `the_v6_network_speaks_first_observation_is_reconnaissance_without_fingerprints` folder:
+
+* scapy
+

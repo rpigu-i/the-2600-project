@@ -1,0 +1,36 @@
+function cook( $s ) {
+    $r = preg_replace(
+        [
+            '/,/',
+            '/\s+/',
+            '/^The /',
+            '/For /',
+        ],
+        [
+            '',
+            '',
+            '',
+            '4',
+        ],
+        ucwords( $s )
+    );
+
+    return $r;
+}
+
+foreach ( glob( '*.mp3' ) as $filename ) {
+    // Filename is in this format: "Artist - Title.mp3"
+    // Extract Title:
+    $title = preg_replace( '/^.*? - /', '', pathinfo( $filename, PATHINFO_FILENAME ) );
+
+    $artist = preg_replace( '/ - .*$/', '', pathinfo( $filename, PATHINFO_FILENAME ) );
+
+    $title = cook( $title );
+    $artist = cook( $artist );
+
+    // Square brackets in filenames cause id3.mp3 to not find the file, so we have to replace them with "?" in our filespec:
+    $cmd = 'id3.exe -a "Artist" -l "Album" -t ' . escapeshellarg( $title . '-' . $artist ) . ' -M "' . preg_replace( '/[\[\]]/', '?', $filename ) . '"' ;
+
+    echo "$cmd\n";
+    exec( $cmd );
+}

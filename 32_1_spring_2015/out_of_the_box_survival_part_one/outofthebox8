@@ -1,0 +1,3 @@
+$name = Get-Content ".\name.log"
+Write-Host $name
+

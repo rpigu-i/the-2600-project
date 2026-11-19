@@ -8,5 +8,19 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Restoring Honest Elections
 
-*Code details to be added - check https://www.2600.com/code/293/  for available code listings*
+Author: Phredd
+
+Files located in `restoring_honest_elections` folder:
+
+* pseudo-code
+
+## XML Automated Gambling
+
+Author: Andy Phillips
+
+Files located in `xml_automated_gambling` folder:
+
+* loop
+

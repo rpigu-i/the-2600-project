@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for i in {0..600}
+do
+
+curl https://conference.net/896a-aae5d1e4ac3f_960x540p-1.2Mbps-1200000_0000${i}.ts > $i.ts
+
+done
+exit 0
+
+

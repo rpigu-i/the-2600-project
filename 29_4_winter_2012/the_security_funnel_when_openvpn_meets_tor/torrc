@@ -1,0 +1,3 @@
+HiddenServiceDir /var/torhsvcs/hs0
+HiddenServicePort 3000 127.0.0.1:2000
+

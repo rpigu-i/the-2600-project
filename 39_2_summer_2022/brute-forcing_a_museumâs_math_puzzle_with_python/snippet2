@@ -1,0 +1,9 @@
+def check_solution(p):
+   try:
+       assert p[0] - p[1] == p[2]
+   except AssertionError:
+       return False
+   else:
+       return True
+
+

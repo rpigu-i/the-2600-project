@@ -1,0 +1,28 @@
+; file offset 0x6D2F04
+; save original registers
+50 push rax
+66:9C pushf
+; rax points to cheat string
+; compare string with "Very"
+813856657279 cmp dword ptr ds:[rax],0x79726556
+; if no string matches then continue game
+75 0F jne lzdoom_____prot.continue_1
+; if string matches then get delta
+E8 00000000 call lzdoom_____prot.delta
+delta:
+58 pop rax
+; rax points at the end of data section
+48:05 DC745700 add rax, 0x5774DC
+; set flag for later h/w check
+C600 01 mov byte ptr ds:[rax],1
+; restore original registers
+continue_1:
+66:9D popf
+58 pop rax
+; execute stolen code due to patch_1
+48:8BF8 mov rdi,rax
+48:85FF test rdi,rdi
+; continue game
+E9 AFF0BAFF jmp lzdoom_____prot.continue_2
+
+

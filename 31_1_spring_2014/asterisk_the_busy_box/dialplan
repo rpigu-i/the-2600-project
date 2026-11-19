@@ -1,0 +1,5 @@
+[testing]
+  exten => s,1,Answer
+  exten => s,2,Playback(/var/lib/asterisk/sounds/tt-weasels)
+  exten => s,3,Hangup
+

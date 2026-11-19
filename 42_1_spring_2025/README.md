@@ -8,5 +8,22 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Setting Up a Simulated Environment for the Robot Operating System (ROS)
 
-*Code details to be added - check https://www.2600.com/code/421/  for available code listings*
+Author: Gazza
+
+Files located in `setting_up_a_simulated_environment_for_the_robot_operating_system_ros` folder:
+
+* docker
+* Dockerfile
+* devcontainer.json
+
+## Building a Password Cracker Using OpenAI and Rust
+
+Author: Bwiz
+
+Files located in `building_a_password_cracker_using_openai_and_rust` folder:
+
+* Cargo.toml
+* main.rs
+

@@ -1,0 +1,8 @@
+username  ALL=NOPASSWD: /usr/bin/apt update
+username  ALL=NOPASSWD: /usr/bin/apt upgrade
+username  ALL=NOPASSWD: /bin/mount
+username  ALL=NOPASSWD: /bin/umount
+username  ALL=NOPASSWD: /sbin/fdisk -l
+username  ALL=NOPASSWD: /sbin/reboot
+
+

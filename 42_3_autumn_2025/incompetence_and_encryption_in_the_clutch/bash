@@ -1,0 +1,213 @@
+#!/usr/bin/env bash
+
+###############################
+#                             #
+#    Ye'olde LUKS Encyrpter   #
+#             by              #
+#     William 5hacksphere     #
+#      written  for 2600      #
+#         in 2025 A.D.        #
+#          tested on:         #
+#      Pop!_OS 22.04 LTS      #
+# satisfaction not guaranteed #
+#                             #
+###############################
+
+
+# to do a dependency check before you start the party:
+dependency_check() {
+  for cmd in cryptsetup mkfs.ext4 mkfs.exfat fdisk wipefs lsblk; do
+    command -v "$cmd" >/dev/null 2>&1 || { echo "$cmd is required but not installed."; exit 1; }
+  done
+}
+
+# lists devices and prompts user for selection:
+display_devices() {
+  echo "=== Available Devices ==="
+  lsblk -d -o NAME,SIZE,MODEL | grep -vE "nvme|loop|zram" || { echo "No suitable devices found."; exit 1; }
+  read -rp "Enter the device basename to work with (e.g., sda): " DEV_BASENAME
+  DEV="/dev/$DEV_BASENAME"
+
+  if ! lsblk "$DEV" &>/dev/null; then
+    echo "Error: Device $DEV does not exist."; exit 1;
+  fi
+}
+
+# helper function for wipe_device():
+find_root_ancestor() {
+  local device="$1"
+  while true; do
+    local parent
+    parent=$(lsblk -nr -o PKNAME,NAME | awk -v dev="$device" '$2 == dev {print $1}')
+    [[ -z "$parent" ]] && break
+    device="$parent"
+  done
+  echo "$device"
+}
+
+# optional function, only runs when user selects 2):
+wipe_device() {
+  echo "WARNING: This will irreversibly wipe all data on $DEV."
+  read -rp "Are you sure you want to continue? (yes/no): " CONFIRM
+  if [[ "$CONFIRM" != "yes" ]]; then
+    echo "Aborting."; exit 1;
+  fi
+
+  # combats drives that automount before re-encryption:
+  echo "Ensuring all partitions on $DEV are unmounted..."
+  if mount | grep "$DEV" &>/dev/null; then
+    echo "Found mounted partitions. Unmounting..."
+    sudo umount "$DEV"* || { echo "Error: Failed to unmount partitions on $DEV."; exit 1; 
+  else
+    echo "No mounted partitions detected."
+  fi
+
+  # look for LUKS containers...
+  echo "Checking for active LUKS containers on $DEV..."
+  CONTAINERS=$(lsblk -nr -o NAME,TYPE | awk '$2 == "crypt" && $1 ~ /^luks-/ {print $1}')
+
+  # ...if you find any, shutdown the one on your target drive:
+  if [[ -n "$CONTAINERS" ]]; then
+    for container in $CONTAINERS; do
+      root_ancestor=$(find_root_ancestor "$container")
+      if [[ "$root_ancestor" == "$DEV_BASENAME" ]]; then
+        echo "Closing LUKS container: $container"
+        sudo umount "/dev/mapper/$container" &>/dev/null || echo "Warning: Failed to unmount $container."
+        sudo cryptsetup luksClose "$container" || { echo "Error: Failed to close $container."; exit 1; }
+      else
+        echo "Skipping unrelated container $container."
+      fi
+    done
+  else
+    echo "No active LUKS containers detected on $DEV."
+  fi
+
+  # you should now be able to wipe the drive with no issues.
+  # note that this isn't strictly necessary, and can be
+  # time consuming for big-capacity hardware
+  echo "Wiping filesystem signatures from $DEV..."
+  sudo wipefs --all "$DEV" || { echo "Error: Failed to wipe filesystem signatures."; exit 1; }
+  echo "Overwriting $DEV with zeros. This may take some time..."
+  sudo dd if=/dev/zero of="$DEV" bs=4M status=progress conv=fsync || {
+    echo "Warning: Partial overwrite detected."
+  }
+  echo "Device wipe completed."
+}
+
+# this is the main event:
+encrypt_device() {
+
+  # start by partitioning the device:
+  echo "Partitioning $DEV..."
+  (
+    echo o
+    echo n
+    echo p
+    echo 1
+    echo
+    echo
+    echo w
+  ) | sudo fdisk "$DEV"
+
+  PART="${DEV}1"
+  if ! lsblk -o NAME | grep -q "$(basename "$PART")"; then
+    echo "Error: Partitioning failed."; exit 1;
+  fi
+
+  echo "Partition created: $PART"
+
+  # gather a couple matching passphrases...
+  while true; do
+    read -rsp "Enter LUKS passphrase: " PASS
+    echo
+    read -rsp "Confirm passphrase: " PASS2
+    echo
+    if [[ "$PASS" == "$PASS2" ]]; then
+      break
+    else
+      echo "Error: Passphrases do not match. Please try again."
+    fi
+  done
+
+  # ... and use them to encrypt your partition:
+  echo "Encrypting $PART with LUKS..."
+  echo "$PASS" | sudo cryptsetup luksFormat --type luks2 "$PART" -q || { echo "Error: LUKS encryption failed."; exit 1; }
+  echo "$PASS" | sudo cryptsetup open "$PART" encUSB || { echo "Error: Failed to open encrypted partition."; exit 1; }
+
+  echo "Encrypted partition is open."
+
+  # now you can setup your filesystem:
+  REALUSER="${SUDO_USER:-$(logname)}"
+  while true; do
+    echo -e "Select filesystem for encrypted partition:\n1) ext4 (Linux-only)\n2) exFAT (Cross-platform)"
+    read -rp "Enter 1 or 2: " FSCHOICE
+    case "$FSCHOICE" in
+      1)
+        echo "Creating EXT4 filesystem..."
+        sudo mkfs.ext4 /dev/mapper/encUSB || { echo "Error: Failed to create EXT4."; sudo cryptsetup close encUSB; exit 1; }
+        break
+        ;;
+      2)
+        echo "Creating exFAT filesystem..."
+        sudo mkfs.exfat /dev/mapper/encUSB || { echo "Error: Failed to create exFAT."; sudo cryptsetup close encUSB; exit 1; }
+        break
+        ;;
+      *) echo "Invalid choice. Try again." ;;
+    esac
+  done
+
+  # and mount the partition for testing:
+  echo "Mounting the encrypted partition..."
+  sudo mkdir -p /mnt/enc_test
+  if [[ "$FSCHOICE" == "2" ]]; then
+
+    # come down this alley exFAT:
+    echo "Mounting with UID and GID options for exFAT..."
+    USER_ID=$(id -u "$REALUSER")
+    GROUP_ID=$(id -g "$REALUSER")
+
+    if ! sudo mount -o uid="$USER_ID",gid="$GROUP_ID" /dev/mapper/encUSB /mnt/enc_test; then
+      echo "Error: Failed to mount encrypted partition."
+      sudo cryptsetup close encUSB
+      exit 1
+    fi
+
+  else
+
+    # and roll down this lane for ext4:
+    if ! sudo mount /dev/mapper/encUSB /mnt/enc_test; then
+      echo "Error: Failed to mount encrypted partition."
+      sudo cryptsetup close encUSB
+      exit 1
+    fi
+    echo "Assigning ownership of /mnt/enc_test to $REALUSER..."
+    if ! sudo chown -R "$REALUSER":"$REALUSER" /mnt/enc_test; then
+      echo "Error: Failed to assign ownership."
+      sudo umount /mnt/enc_test
+      sudo cryptsetup close encUSB
+      exit 1
+    fi
+  fi
+
+  # unmount and close down before we exit:
+  echo "Partition mounted at /mnt/enc_test. Press Enter when done."
+  read -r
+  sudo umount /mnt/enc_test
+  sudo cryptsetup close encUSB
+  echo "Encryption process complete."
+}
+
+# the main script logic is straightforward:
+dependency_check
+display_devices
+
+while true; do
+  echo -e "What would you like to do with $DEV?\n1) Encrypt fresh drive\n2) Wipe existing LUKS drive"
+  read -rp "Enter 1 or 2: " CHOICE
+  case "$CHOICE" in
+    1) encrypt_device; break ;;
+    2) wipe_device; encrypt_device; break ;;
+    *) echo "Invalid choice. Please enter 1 or 2." ;;
+  esac
+done
+

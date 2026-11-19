@@ -1,0 +1,51 @@
+from Tkinter import *
+import Tkinter, Tkconstants, tkFileDialog
+from PIL import Image, ImageTk
+from shutil import copyfile
+import urllib
+import time
+
+cam_url   = "https://video.dot.state.mn.us/video/image/metro/C1628"
+cam_title = "I-35W: I-35W NB @ Washington Ave"
+saved     = "lastcapture.jpg"
+
+tkimg = [None]           # Prevents garbage collection
+framerate_delay = 1000   # in milliseconds
+                         # Black Lives Matter
+
+root = Tkinter.Tk()
+root.title("MNDOT TRAFFIC CAM WATCHER")
+label = Tkinter.Label(root)
+label.pack()
+
+def getImage():
+    urllib.urlretrieve(cam_url, saved)
+    print "Pulling image from camera " + cam_url[48:] + " - "\
+        + cam_title
+
+def saveImage():
+    stamp = time.time()
+    copyfile(saved, "saved\\cam" + cam_url[48:] + "-"\
+        + str(stamp)[0:10] + ".jpg")
+    print "Snapshot saved at saved\\cam" + cam_url[48:] + "-"\
+        + str(stamp)[0:10] + ".jpg"
+
+def loopCapture():
+    try:
+        getImage()
+        tkimg[0] = ImageTk.PhotoImage(file=saved)
+        label.config(image=tkimg[0])
+        labelname = Label(root, text=cam_title).place(x=0, y=0)
+        root.update_idletasks()
+        root.after(framerate_delay, loopCapture)
+        saveImage()
+    except IOError:
+        print IOError
+    except AttributeError:
+        print AttributeError
+
+root.config()
+loopCapture()
+root.mainloop()
+
+

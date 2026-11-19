@@ -1,0 +1,4 @@
+:for i in {0..999}; do rm "$i.png"; done
+for i in {0..999}; do rm "$i.png"; done
+for i in {0..999}; do cat "$i.txt" >> book.txt; done
+

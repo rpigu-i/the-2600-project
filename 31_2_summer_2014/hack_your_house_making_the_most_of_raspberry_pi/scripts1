@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ssh root@<ip number of Pi> " /etc/init.d/<gpio activate script>
+ssh root@<ip number of Pi> " ./<script for on or off> > /dev/null
+

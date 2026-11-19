@@ -1,0 +1,15 @@
+	For each race...
+		Initialize all candidates' totals to zero
+		Do until all votes are counted (whether as they are cast, or when polls close)
+			If vote-is-for-candidate-A,
+				Add 1 to candidate-A-total
+			Else-If vote-is-for-candidate-B,
+				Add 1 to candidate-B-total
+			...etc..., through...
+			Else-If vote-is-for-candidate-x,
+				Add 1 to candidate-x-total
+			End
+		End Do
+		Report totals
+	End
+

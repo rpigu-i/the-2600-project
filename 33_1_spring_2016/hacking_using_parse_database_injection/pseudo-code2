@@ -1,0 +1,13 @@
+<script>
+myMethod(){
+Method for creating and saving the parse object
+}
+</script>
+Initialize access to parse database using parse API
+<div id="myHiddenTag">........ .<div>
+$("#myHiddenTag").onhover(function({
+         myMethod().then(function({
+                     console.log("Everything is fine");
+         });
+});
+

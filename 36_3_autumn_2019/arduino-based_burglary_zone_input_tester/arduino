@@ -1,0 +1,70 @@
+Loaded Libraries:
+NewLiquidCrystal
+// or Liquid-Crystal
+Wire
+/*
+Configuration bytes:
+// 12-bit device values from 0-4095
+// page 18-19 spec sheet
+buffer[0] = 0b01000000; // control byte
+// bits 7-5; 010 write DAC; 011 write DAC and EEPROM
+// bits 4-3 unused
+// bit 0 unused
+buffer[1] = 0b00000000; //HIGH data
+// bits 7-0 D11-D4
+buffer[2] = 0b00000000; // LOW data
+// bits 7-4 D3-D0
+// bits 3-0 unused
+*/
+#include <Wire.h> // specify use of Wire.h library
+#define MCP4725 0x60 // MCP4725 base address
+byte buffer[3];
+unsigned int val;
+#include <FastIO.h>
+#include <I2CIO.h>
+#include <Wire.h>
+#include <LCD.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE); // Setup lcd
+//LiquidCrystal_I2C lcd(0x27,16,2) lcd address may be different as to a lcd vendor specification
+void setup() {
+pinMode( 4, INPUT); //pin to starts measurement
+pinMode(13, OUTPUT); //Relay switch ON to start compromising
+pinMode(A0, INPUT); // pin as Analog IN to measure zone loop voltage
+} // end setup
+void loop() {
+int u = 0;
+int val = 0;
+buffer[0] = 0b01000000; // control byte
+delay(200);//Wait
+u = analogRead(0);
+val = u* 4; // read pot
+buffer[1] = val >> 4; // MSB 11-4 shift right 4 places
+buffer[2] = val << 4; // LSB 3-0 shift left 4 places
+float sensorValue = 0;
+sensorValue = u*(5.0/1023.0)*4;
+Wire.begin(); // begin I2C
+lcd.begin(16,2);
+lcd.backlight();
+lcd.setCursor(0, 0);
+lcd.print("Measured VoltS =");
+lcd.setCursor(0, 1);
+lcd.print(sensorValue);
+lcd.print("__");
+lcd.print(u);
+delay(500);
+while (digitalRead(4) == LOW) {
+//digitalWrite(2, HIGH); //ready LED ON, option
+delay(200);// delay for contacts to stabilize
+Wire.beginTransmission(MCP4725); // address device
+Wire.write(buffer[0]); // pointer
+Wire.write(buffer[1]); // 8 MSB
+Wire.write(buffer[2]); // 4 LSB
+Wire.endTransmission();
+delay(200);//Wait
+digitalWrite(13, HIGH); //Relay 2 ON to compromise burglary zone-loop
+delay(20000);//Wait
+}
+} // end loop
+
+

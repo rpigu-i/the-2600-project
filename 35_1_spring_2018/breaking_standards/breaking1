@@ -1,0 +1,10 @@
+# First encode our user@password in hexadecimal, swap the byte of each 16bits word
+# reverse the xxd command and write back to a 'header' temporary file 
+echo -n "2600@rules" | xxd -p | sed 's/\(.\)\(.\)/\2\1/g' | xxd -r -p > header
+# A PI9 file has a constant size of 77824 bytes, our user@password couple is 10 characters long
+# so write the whole source file minus ten bytes into a 'body' temp file
+tail -c 77814 COLOURF.PI9 > body
+# concatenate 'header' and 'body' to get the resulting image with the first 4 colors altered (each color takes three bytes)
+cat header body > COLOURB.PI9
+
+

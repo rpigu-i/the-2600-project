@@ -1,0 +1,24 @@
+mailFlood 1
+
+Write "How many emails:"
+num = read input
+
+Write "what is the Address:"
+addy = read input
+
+subj = "PWND"
+body = "Stop emailing yourself!"
+
+date = system.get_date
+
+msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n%s\n
+	%(addy, addy, subj, date, body)
+
+n = 0
+
+while n < num:
+	connect to smtp (localhost, 25)
+	sendmail (addy, addy, msg)
+	disconnect from smtp
+	n = n +1
+

@@ -1,0 +1,5 @@
+get-date -format u > c:\windows\date.txt
+New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "ForceUnlockLogon" -Value "0" -PropertyType DWORD -Force | Out-Null
+New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name "CachedLogonsCount" -Value "10" -PropertyType String -Force | Out-Null
+
+

@@ -1,0 +1,81 @@
+-- Crooked Cartridge - BizHawk Lua Script --
+local intensity, cache, sectors = 0, {}, {}
+local CHUNK, HEAL, SEC_SZ = 4096, 50, 0x400000
+local f = forms.newform(300, 360, "Crooked Cart")
+local l_tilt = forms.label(f, "Tilt: 0%", 10, 10, 200, 20)
+local l_stat = forms.label(f, "Status: Idle", 10, 320, 200, 20)
+for i=1,8 do
+  sectors[i] = forms.checkbox(f, "Sector "..i, 10, 40+((i-1)*25))
+  if i>1 then forms.setproperty(sectors[i], "Checked", true) end
+end
+local c_obit = forms.checkbox(f, "OBLITERATE", 10, 260)
+forms.setproperty(c_obit, "ForeColor", "Red")
+local c_inv = forms.checkbox(f, "Invert Select", 10, 290)
+
+function set_dom()
+  local d = memory.getmemorydomainlist()
+  for _,n in ipairs(d) do if n=="ROM" or n=="Cartridge" then
+    memory.usememorydomain(n); return true end end
+end
+
+while true do
+  local k = input.get()
+  if k["LeftBracket"] then intensity = intensity - 1 end
+  if k["RightBracket"] then intensity = intensity + 1 end
+  if intensity < 0 then intensity = 0 elseif intensity > 100 then intensity = 100 end
+  forms.settext(l_tilt, "Tilt: "..intensity.."%")
+
+  if set_dom() then
+    local r_sz = memory.getmemorydomainsize()
+    -- HEALING LOGIC (Runs at 0% Intensity)
+    if intensity == 0 then
+     if next(cache) ~= nil then
+      forms.settext(l_stat, "Healing...")
+      local c = 0
+      for a,d in pairs(cache) do
+        memory.write_bytes_as_array(a, d); cache[a] = nil; c=c+1
+        if c >= HEAL then break end
+      end
+    else forms.settext(l_stat, "Clean") end
+   else
+    -- CORRUPTION LOGIC
+    forms.settext(l_stat, "Corrupting...")
+    local inv, active, oblit = forms.ischecked(c_inv), {}, forms.ischecked(c_obit)
+    for i=1,8 do
+     local c = forms.ischecked(sectors[i])
+     if (c and not inv) or (not c and inv) then table.insert(active, i) end
+     end
+
+    if #active > 0 then
+       local hits = math.floor(((intensity/100)^2) * 50)
+       local shots = 10
+       if oblit then hits=hits*10; shots=20 end
+       if hits<1 and math.random()<(intensity/10) then hits=1 end
+
+       for i=1,hits do
+         local sec = active[math.random(1, #active)]
+         local start = (sec-1)*SEC_SZ
+         local len = (start+SEC_SZ > r_sz) and (r_sz-start) or SEC_SZ
+
+         if len > CHUNK then
+           -- Align to 4KB Grid to prevent cache overlap
+           local idx = math.random(0, math.floor(len/CHUNK)-1)
+           local addr = start + (idx * CHUNK)
+
+           -- Backup original data if not cached
+           if not cache[addr] then
+             cache[addr] = memory.read_bytes_as_array(addr, CHUNK)
+           end
+           -- Shotgun: Write random 32-bit noise
+           for s=1,shots do
+             local off = math.random(0, (CHUNK/4)-1)*4
+             memory.write_u32_be(addr+off, math.random(0, 0xFFFFFFFF))
+        end
+      end
+     end
+    end
+   end
+  end
+  emu.frameadvance()
+ end
+

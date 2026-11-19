@@ -1,0 +1,26 @@
+     col:=abs(vlx-nx);
+     {that is what I just said written in mathematics hehehe}
+     if col>127 then col:=127;
+     {Just not to overflow}
+     difx:=127-col;
+     {^^^^ that is the first component of the final color.. the light we get from the X axis}
+     if difx<0 then difx:=1;
+
+     {Now we do the same stuff for the Y axis }
+     col:=abs(vly-ny);
+    if col>127 then col:=127;
+    dify:=127-col;
+    if dify<0 then dify:=1;
+    {finaly we add the two intensities and we're done..}
+    col:=(difx+dify) ;
+    if col>128 then
+     mem[vaddr2:x+y*320]:=col;
+     {That's it.. put the damn pixel}
+   {putpixel(x,y,col,vaddr2);}
+  end;
+  end;
+ flip32(vaddr2,sega000);
+ cls32(vaddr2,0);
+ until keypressed;
+end;
+

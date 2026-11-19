@@ -8,5 +8,30 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Hax0rz? Sniffing My Critical Infrastructure?! Itâs More Likely Than You Think!
 
-*Code details to be added - check https://www.2600.com/code/371/  for available code listings*
+Author: Tim Tepatti
+
+Files located in `hax0rz_sniffing_my_critical_infrastructure_itâs_more_likely_than_you_think` folder:
+
+* bring_up_interfaces.sh
+* enable_monitor_mode.sh
+* freq_rotate.sh
+* freq.txt
+
+## Has Your Password Been Pwned?
+
+Author: Jan Markowski
+
+Files located in `has_your_password_been_pwned` folder:
+
+* testpass.sh
+
+## More Advanced Processors, Greater Privacy Intrusions
+
+Author: Diana
+
+Files located in `more_advanced_processors_greater_privacy_intrusions` folder:
+
+* TI99
+

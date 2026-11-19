@@ -1,0 +1,13 @@
+WARC/1.0^M
+WARC-Type: warcinfo^M
+Content-Type: application/warc-fields^M
+WARC-Date: 2015-09-15T13:20:42Z^M
+WARC-Filename: test.warc.gz^M
+WARC-Block-Digest: sha1:XGCP3I5MSJ4DGD7EH5DTLJJXULVOATQK^M
+Content-Length: 224^M
+^M
+software: Wget/1.16.3 (linux-gnu)^M
+format: WARC File Format 1.0^M
+^M
+^M
+

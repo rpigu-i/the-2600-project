@@ -1,0 +1,10 @@
+$query="SELECT answer FROM brain WHERE phrase='".$upperWord."'";
+$result	= readDatabase($query);
+$num=mysql_numrows($result);
+$i2=0;
+while ($i2 < $num) {	
+	$arrOut[$i][0]= mysql_result($result,$i2,"answer");
+	$i++;	
+	$i2++;
+}
+

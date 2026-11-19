@@ -1,0 +1,43 @@
+class-map match-any P2P-class
+ match protocol bittorrent
+ match protocol edonkey
+ match protocol fasttrack
+ match protocol gnutella
+ match protocol kazaa2
+ match protocol winmx
+ match protocol directconnect
+ match protocol irc
+ match protocol cuseeme
+ match protocol skype
+ match protocol ssh
+ match protocol novadigm
+
+policy-map P2P
+ class P2P-class
+   police cir 8000
+    conform-action transmit 
+    exceed-action drop
+
+interface FastEthernet0/1
+ description INTERNET - COX Cable
+ ip address 72.214.242.26 255.255.255.0
+ ip access-group 150 in
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ ip nbar protocol-discovery
+ ip nat outside
+ ip virtual-reassembly
+ duplex auto
+ speed auto
+ ntp disable
+ fair-queue
+ no cdp enable
+ service-policy input P2P
+
+ip nat translation timeout 1200
+ip nat translation tcp-timeout 1200
+ip nat translation udp-timeout 1200
+ip nat translation max-entries all-host 300
+
+

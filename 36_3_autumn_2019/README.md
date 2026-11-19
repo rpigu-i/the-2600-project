@@ -8,5 +8,35 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Fully Homomorphic Encryption and Privacy
 
-*Code details to be added - check https://www.2600.com/code/363/  for available code listings*
+Author: Thor Mirchandani
+
+Files located in `fully_homomorphic_encryption_and_privacy` folder:
+
+* fullyhomo.py
+
+## Introduction to Computer Viruses, Example in Windows Powershell
+
+Author: Hristo (Izo) G.
+
+Files located in `introduction_to_computer_viruses_example_in_windows_powershell` folder:
+
+* PS_VIR_EX1.PS1
+
+## Letter
+
+Author: Chester
+
+Files located in `letter` folder:
+
+* nws-scraper
+
+## Arduino-Based Burglary Zone Input Tester
+
+Author: Cezary Jaronczyk
+
+Files located in `arduino-based_burglary_zone_input_tester` folder:
+
+* arduino
+

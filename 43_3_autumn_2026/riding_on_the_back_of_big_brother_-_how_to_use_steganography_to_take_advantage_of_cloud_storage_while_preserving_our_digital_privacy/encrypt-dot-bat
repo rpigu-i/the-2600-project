@@ -1,0 +1,93 @@
+@echo OFF
+
+set BATCH_SCRIPT="encrypt_batch.bat"
+
+:: Getting input file
+if not "%~1"=="" set "FILE=%~1"
+:: otherwise, FILE is expected to be set somewhere
+:: (e.g. in the BATCH_SCRIPT)
+
+:: Errors catching
+if not exist "%FILE%" (
+    echo ERROR: File is not found at provided location "%FILE%"
+    exit /b
+)
+if exist "%FILE%\" (
+    echo ERROR: %FILE% is a directory. Use %BATCH_SCRIPT% instead for the job!
+    exit /b
+)
+where 7z >nul 2>&1 || (
+    echo ERROR: 7z not found in PATH. Please install 7z.
+    exit /b
+)
+
+setlocal
+
+:: In case encrypting only one file:
+:: (i.e. PASSWORD is not provided yet by %BATCH_SCRIPT%).
+if "%PASSWORD%"=="" (
+    :: Ask for password using PowerShell to hide input
+    echo Please enter password for encryption:
+    for /f "delims=" %%p in ('powershell -command "[System.Console]::Write(''); $password=''; while($true) { $key = [System.Console]::ReadKey($true); if ($key.Key -eq 'Enter') { break }; $password += $key.KeyChar } $password"') do set PASSWORD=%%p
+)
+
+REM :: Check if password is empty
+REM if not defined PASSWORD (
+REM    echo ERROR: Password cannot be empty. Please provide a password.
+REM    exit /b
+REM )
+
+:: Get the input file extension
+set "EXT="
+for /F %%i in ("%FILE%") do set EXT=%%~xi
+
+:: Finding the suitable host to embed
+set "HOST=%~dp0host"
+set "HOST_EXT="
+set "FILE_OUT="
+
+if not exist "%HOST%" (
+    echo ERROR: Host folder not found: "%HOST%"
+    exit /b
+)
+
+if exist "%HOST%\host%EXT%" (
+    set "HOST_EXT=%HOST%\host%EXT%"
+    set "FILE_OUT=%FILE%"
+) else (
+    set "HOST_EXT=%HOST%\host.png"
+    set "FILE_OUT=%FILE%.png"
+)
+
+if not exist "%HOST_EXT%" (
+    echo ERROR: Host file is not found at provided location %HOST_EXT%
+    endlocal
+    exit /b
+)
+
+:: Proceed only if it is not a directory but a file
+:: (Also covers the cases when FILE name ends with a dot
+:: or wildcard-like name)
+if exist "%FILE%" if not exist "%FILE%\*" (
+    :: Encrypt file with or without password
+    if "%PASSWORD%"=="" (
+        :: No password provided, use 7z without -p
+        7z a -t7z -mx=9 -mhe=on "%FILE%.7z" "%FILE%" -sdel > nul 2>&1
+    ) else (
+        :: Password provided, use 7z with -p
+        7z a -t7z -mx=9 -mhe=on "%FILE%.7z" "%FILE%" -p"%PASSWORD%" -sdel > nul 2>&1
+    )
+
+    :: Continue only if 7z command succeeded.
+    if errorlevel 1 (
+        echo ERROR: Encryption failed.
+        exit /b
+    )
+
+    :: Embed the encrypted file to the host and name it as original file, and remove encrypted file.
+    copy /B "%HOST_EXT%" + "%FILE%.7z" "%FILE_OUT%" > nul 2>&1 && del /f /q "%FILE%.7z"
+)
+
+:: reset password in case encryption for one file only.
+endlocal
+

@@ -1,0 +1,6 @@
+unzip DeDRM_tools_6.5.5.zip DeDRM_calibre_plugin/DeDRM_plugin.zip
+mkdir -p calibre_plugins/dedrm
+touch calibre_plugins/__init__.py # make it a package
+unzip DeDRM_calibre_plugin/DeDRM_plugin.zip -d calibre_plugins/dedrm
+
+

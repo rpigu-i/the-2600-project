@@ -1,0 +1,12 @@
+WARC/1.0^M
+WARC-Type: response^M
+WARC-Target-URI: http://test.wtf/^M
+WARC-Date: 2015-09-15T13:20:42Z^M
+Content-Type: application/http;msgtype=response^M
+Content-Length: 4896^M
+^M
+HTTP/1.1 200 OK^M
+Server: nginx/1.8.0^M
+Date: Tue, 15 Sep 2015 13:20:42 GMT^M
+Content-Type: text/html^M
+

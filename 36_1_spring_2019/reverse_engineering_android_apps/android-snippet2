@@ -1,0 +1,12 @@
+invoke-virtual {p0}, Lcom/headsup/model/Deck;->getSku()Ljava/lang/String;
+move-result-object v0
+invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
+move-result v0
+if-eqz v0, :cond_0
+const-string v0, *"this%heads*up#deck@is_purchased"*
+iput-object v0, p0, Lcom/headsup/model/Deck;->price:Ljava/lang/String;
+:cond_0
+iget-object v0, p0, Lcom/headsup/model/Deck;->price:Ljava/lang/String;
+return-object v0
+
+

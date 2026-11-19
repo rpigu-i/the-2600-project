@@ -1,0 +1,7 @@
+	@ECHO OFF
+	COLOR f0
+	PROMPT $S$H
+	TITLE English Paper
+	CLS
+	ECHO
+

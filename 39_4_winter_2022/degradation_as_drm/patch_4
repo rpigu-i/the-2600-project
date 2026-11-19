@@ -1,0 +1,38 @@
+; file offset 0x6D2F2C
+; save original registers
+66:9C pushf
+50 push rax
+53 push rbx
+51 push rcx
+52 push rdx
+E8 00000000 call lzdoom_____prot.delta_2
+delta_2:
+58 pop rax
+48:05 B9745700 add rax,0x5774B9
+; check if flag set by cheat string check
+; If not set then continue game else check h/w
+; processor info and feature bits
+8038 01 cmp byte ptr ds:[rax],1
+75 17 jne lzdoom_____prot.continue_3
+48:33C0 xor rax,rax
+48:FFC0 inc rax
+0FA2 cpuid
+; If h/w check fails introduce frame delay
+81F9 0322989E cmp ecx,0x9E982203
+74 07 je lzdoom_____prot.continue_3
+B9 00101101 mov ecx,0x1111000
+frame_drop:
+E2 FE loop lzdoom_____prot.frame_drop
+; restore original registers, execute stolen
+; code due to patch_3 and continue game
+continue_3:
+5A pop rdx
+59 pop rcx
+5B pop rbx
+58 pop rax
+66:9D popf
+57 push rdi ; stolen code
+48:81EC 80000000 sub rsp,0x80 ; stolen code
+E9 5C2495FF jmp lzdoom_____prot.continue_4
+
+

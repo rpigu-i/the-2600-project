@@ -1,0 +1,7 @@
+from itertools import cycle
+cyc = cycle(userKey)
+
+for char, rot in zip(plainText, cyc):
+ print(char, alpha.index(rot))
+
+

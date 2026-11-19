@@ -1,0 +1,11 @@
+static ssize_t (*original_read) (int fd, void *buf, size_t count) = NULL;
+ssize_t
+read (int fd, void *buf, size_t count) {
+char process_name[MAX_PROCESS_NAME_LEN] = { 0 };
+if(original_read == NULL) {
+original_read = dlsym (RTLD_NEXT, "read");
+if(original_read == NULL) {
+fprintf (stderr, "Error: Could not find original read function.\n");
+return -1;
+}
+}

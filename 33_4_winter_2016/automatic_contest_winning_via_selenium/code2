@@ -1,0 +1,8 @@
+em_box = driver.find_element_by_id("i0116")
+em_box.click() # Just to be safe. Users usually don't start typing in a box before clicking it.
+em_box.send_keys("gil_baits@hotmail.com")
+pw_box = driver.find_element_by_id("i0118")
+pw_box.click()
+pw_box.send_keys("password")
+Pw_box.send_keys(Keys.RETURN)
+

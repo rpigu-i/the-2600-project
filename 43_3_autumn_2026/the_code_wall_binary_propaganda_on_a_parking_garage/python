@@ -1,0 +1,2 @@
+def bin_to_text(s): return ''.join(chr(int(b, 2)) for b in s.split()) print(bin_to_text("01001001 01001110 01010011 01010000 01001001 01010010 01000101"))# INSPIRE
+

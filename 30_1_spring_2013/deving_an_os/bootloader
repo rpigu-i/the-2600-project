@@ -1,0 +1,49 @@
+; Main.asm
+; This is a barebone bootloader to boot from the CD.
+
+; BITS 16 tells NASM to output for 16 bit mode.
+BITS 16
+
+; ORG 0x7C00 ensures that all the data references are w.r.t. 0x7C00.
+ORG 0x7C00
+
+; This is our entry point, where the BIOS leaves us.
+; The BIOS ensures that:
+; a) DL contains the boot drive number. This is a number to identify what device we booted from, so that we can read/write from/to it later.
+; b) CS:IP points to 0x7C00. Note that this doesn't mean IP (instruction pointer) is 0x7C00.
+Main:
+; This is known as a long jump, and is the only way to reset the CS segment register. The rest of the registers can be changed via a simple mov instruction.
+jmp 0x0000:Startup
+
+; We save the Boot Drive number here.
+BootDrive:
+db 0
+
+; Now, we are assured that the Instruction Pointer is 0x7C00.
+Startup:
+; We stop all maskable interrupts until we don't set up a stack, since the interrupts require a stack.
+
+cli
+
+; We require all segment registers to be 0x0000. All except CS can be set via a mov instruction.
+xor ax, ax
+mov ds, ax
+mov es, ax
+mov fs, ax
+mov gs, ax
+
+; Set the stack to 0x7C00. Since the stack grows downwards on x86, this means that unless we do extra pops, we never cross into the bootloader's area.
+mov ss, ax
+mov sp, 0x7C00
+
+; Now that we have set up the stack, we enable maskable interrupts.
+sti
+
+; Though disk reading is out of the scope of this tutorial, you should save the drive number if you want to use it later on.
+mov [BootDrive], dl
+
+; All the code that we introduce later on should be put here.
+
+; Here, $ is a special NASM symbol, which points to the address of the current instruction. Thus, it keeps on jumping to the current instruction, thus effectively halting the CPU.
+jmp $
+

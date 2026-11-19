@@ -1,0 +1,10 @@
+#The first line states the channel we want to use, the target number, and our SIP provider's outbound call function
+Channel: SIP/7025811212@vitel-outbound #phone number changed to protect privacy
+MaxRetries: 50
+RetryTime: 2
+#MaxRetries are high and RetryTime is low to prevent target from answering while keeping action on the line
+Context: testing
+Extension: s
+Priority: 1
+#The above three lines direct the call file to a precise point in the dialplan if the target actually answers
+

@@ -1,0 +1,17 @@
+{
+ "name": "mcquery.js",
+ "version": "1.0.0",
+ "description": "Query Innova's Pro Shop for new McPro Roc3 discs",
+ "main": "mcquery.js",
+ "scripts": {
+   "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "author": "Brenden Hyde",
+ "license": "ISC",
+ "dependencies": {
+   "cheerio": "^0.20.0",
+   "request": "^2.73.0",
+   "twilio": "^2.9.1"
+ }
+}
+

@@ -1,0 +1,20 @@
+public void send_email_via_outlook(bool battach, string filepath)
+{
+     try
+     {
+          Microsoft.Office.Interop.Outlook.Application outlookObj = new Microsoft.Office.Interop.Outlook.Application();
+          Outlook.MailItem mailItem = (Outlook.MailItem) outlookObj.CreateItem(Outlook.01ItemType.ol.MailItem);
+          mailItem.Subject = "This is the subject";
+          mailItem.To = "someone@example.com";
+          mailItem.Body = "This is the message.";
+
+          if(battach==true)
+            MailItem.Attachments.Add(filepath);//logPath is a string holding path to the log.txt file
+
+          mailItem.Display(false);
+     }
+     catch (Exception ex)
+     {
+
+     }
+

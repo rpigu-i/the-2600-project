@@ -1,0 +1,22 @@
+display dialog "enter osx username" default answer ""
+set uname to text returned of result
+
+display dialog "enter number of pages" default answer ""
+set pnum to text returned of result
+
+tell application "Finder"
+  activate
+  make new folder at folder "Desktop" of folder uname of folder "Users" of startup disk with properties {name:"textbook"}
+end tell
+
+set counter to "0"
+tell application "System Events"
+  activate application "Kindle.app"
+  repeat pnum times
+    set counter to counter + 1
+    do shell script "screencapture -t pdf /Users/" & uname & "/Desktop/textbook/" & counter & ".pdf"
+    tell application "System Events" to key code 124
+    delay 0.3
+  end repeat
+end tell
+

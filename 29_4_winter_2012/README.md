@@ -8,5 +8,29 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## C is for Camouflage
 
-*Code details to be added - check https://www.2600.com/code/294/  for available code listings*
+Author: Malandraj3m
+
+Files located in `c_is_for_camouflage` folder:
+
+* c.bat
+
+## The Security Funnel: When OpenVPN Meets Tor
+
+Author: Wananapaoa Uncle
+
+Files located in `the_security_funnel_when_openvpn_meets_tor` folder:
+
+* torrc
+
+## Tactical Teensy Rapid Recon
+
+Author: chap0
+
+Files located in `tactical_teensy_rapid_recon` folder:
+
+* example
+* payload
+* vbs
+

@@ -1,0 +1,89 @@
+#!/bin/bash
+# solve_puzzle.sh - Solves the daily mystery puzzle from
+# mystery-o-matic.com
+# This script fetches the puzzle data, extracts available
+# options dynamically,
+# and brute-forces the solution by hashing candidate answers
+# until they match.
+
+# URL where the daily puzzle data is served
+DATA_URL="https://mystery-o-matic.com/data.js"
+
+echo "Fetching puzzle data..."
+# Fetch the data.js file from the website
+RESPONSE=$(curl -s "$DATA_URL")
+
+# Extract the SHA256 hash of the correct answer from the response
+# The server provides this hash, and we need to find which input
+# produces it
+ANSWER_HASH=$(echo "$RESPONSE" | grep -oP '"correctAnswer":\s*"\K[^"]+')
+echo "Target hash: $ANSWER_HASH"
+
+# Extract configuration values from the puzzle data
+# numIntervals: how many 15-minute time slots exist
+# (determines possible times)
+NUM_INTERVALS=$(echo "$RESPONSE" | grep -oP '"numIntervals":\s*\K\d+')
+# victim: the character who was murdered (cannot be the killer)
+VICTIM=$(echo "$RESPONSE" | grep -oP '"victim":\s*"\K[^"]+')
+
+# --- Generate all possible times based on numIntervals ---
+# The puzzle uses 15-minute intervals - try all hours from
+# 12 down to 1 for each interval
+TIMES=""
+for hour in 12 11 10 9 8 7 6 5 4 3 2 1; do
+    for min in 00 15 30 45; do
+        TIMES+=$(printf "%d:%02d " $hour $min)
+    done
+done
+TIMES=$(echo $TIMES | sed 's/ $//')
+
+# --- Extract weapons from weaponMap ---
+# The weaponMap contains entries like "$SCREWDRIVER":
+# "sports court"
+# We extract all weapon names (keys), remove $ prefix,
+# convert to lowercase
+WEAPONS_RAW=$(echo "$RESPONSE" | grep -oP '"\$[A-Z_]+"' | tr -d '"' | sed
+'s/\$//' | tr 'A-Z' 'a-z' | tr '_' ' ' | sort -u)
+
+# Store weapons in an array to preserve multi-word items
+mapfile -t WEAPONS_ARRAY <<< "$WEAPONS_RAW"
+
+# --- Extract suspects from characterNames ---
+# characterNames is an array of all character Ids
+# (e.g., ["bob", "frida", "eddie", "alice"])
+# We extract from between the [ ] brackets
+SUSPECTS=$(echo "$RESPONSE" | sed -n '/"characterNames": \[/,/\]/p' | grep
+-oP '"[a-z]+"' | tr -d '"' | tr '\n' ' ')
+SUSPECTS=$(echo $SUSPECTS | sed 's/ $//')
+
+echo "Extracted options:"
+echo "Weapons: ${WEAPONS_ARRAY[*]}"
+echo "Times: $TIMES"
+echo "Suspects: $SUSPECTS"
+
+echo ""
+echo "Searching for solution..."
+# --- Brute-force approach: try all combinations ---
+# The puzzle expects input in format: "suspect-weapon-time"
+# (e.g., "frida-pistol-6:45")
+# This string is hashed with SHA256 and compared against
+# the correct answer hash
+for suspect in $SUSPECTS; do
+    for weapon in "${WEAPONS_ARRAY[@]}"; do
+        for time in $TIMES; do
+            INPUT="${suspect}-${weapon}-${time}"
+            HASH=$(echo -n "$INPUT" | sha256sum | cut -d' ' -f1)
+            if [ "$HASH" = "$ANSWER_HASH" ]; then
+                echo ""
+                echo "SOLUTION FOUND!"
+                echo "Killer: $suspect"
+                echo "Weapon: $weapon"
+                echo "Time: $time"
+                exit 0
+            fi
+        done
+    done
+done
+
+echo "No solution found"
+

@@ -8,5 +8,37 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Smile, Youâre On Camera
 
-*Code details to be added - check https://www.2600.com/code/373/  for available code listings*
+Author: Alsch
+
+Files located in `smile_youâre_on_camera` folder:
+
+* camera-source
+
+## Hacking Rotary Dials
+
+Author: yeat
+
+Files located in `hacking_rotary_dials` folder:
+
+* 01_rotary_dial.ino
+
+## QR Chaos
+
+Author: Edward Miro aka c1ph0r
+
+Files located in `qr_chaos` folder:
+
+* qr.py
+* php-code
+
+## Make Viri Great Again
+
+Author: Israel
+
+Files located in `make_viri_great_again` folder:
+
+* snippet1
+* snippet2
+

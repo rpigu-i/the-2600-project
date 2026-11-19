@@ -1,0 +1,10 @@
+#!/bin/bash
+wget -O /mnt/ndr.mp3 http://ndr-ndrinfo-niedersachsen.cast.addradio.de/ndr/ndrinfo/niedersachsen/mp3/128/stream.mp3 &
+echo $!
+PID=$!
+echo $PID
+# seconds how long I record the stream
+sleep 2700
+kill $PID
+
+

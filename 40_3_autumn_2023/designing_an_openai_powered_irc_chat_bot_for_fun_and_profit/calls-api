@@ -1,0 +1,77 @@
+my $url = "https://api.openai.com/v1/completions";
+my $model = "text-davinci-003"; ## other model implementations work too
+my $heat = "0.7"; ## ?? wtf
+my $uri = URI->new($url);
+my $ua = LWP::UserAgent->new;
+$textcall = Irssi::strip_codes($textcall);
+$textcall =~ s/\"/\\\"/g;
+my $askbuilt =
+ "{\"model\": \"$model\",\"prompt\": \"$textcall\","
+. "\"temperature\":$heat,\"max_tokens\": $tokenlimit,"
+. "\"top_p\": 1,\"frequency_penalty\": 0,\"presence_"
+. "penalty\": 0}";
+$ua->default_header("Content-Type" => "application/json");
+$ua->default_header("Authorization" => "Bearer " . $apikey);
+my $res = $ua->post($uri, Content => $askbuilt); ## send the post request to the api
+if ($res->is_success) {
+ my $said = decode_json($res->decoded_content())->{choices}[0]{text};
+ my $toks = decode_json($res->decoded_content())->{choices}[0]{total_tokens};
+ if (($said =~ m/^\s+$/) || ($said =~ m/^$/)) 
+  $said = "";
+ }
+ $said =~ s/^\s+//;
+ $said =~ s/^\n+//;
+ $said =~ s/Franklin: //;
+ $said =~ s/Reply: //;
+ $said =~ s/My reply is: //;
+ $said =~
+  s/^\s*[\?|.|-]\s*(\w)/$1/; ## if it spits out a question mark, this fixes it
+ if ($said =~ m/^\s*\?\s*$/) {
+  $said = "";
+ }
+ unless ($said eq "") {
+  my $hexfn = substr( ## the reencode fixes the utf8 bug
+   Digest::MD5::md5_hex(
+     utf8::is_utf8($said)
+    ? Encode::encode_utf8($said)
+    : $said
+  ),
+  0,
+  8
+ );
+ umask(0133);
+ my $cost = sprintf("%.5f", ($toks / 1000 * $price_per_k));
+ open(SAID, '>', "$httploc$hexfn" . ".txt")
+  or Irssi::print "Could not open txt file for writing.";
+ binmode(SAID, "encoding(UTF-8)");
+ print SAID
+  "$nick asked $textcall_bare with hash $hexfn\n<---- snip ---->\n$said\n";
+ close(SAID);
+ my $fg_top = '<!DOCTYPE html> <html><head> <!-- Google tag (gtag.js) --> <script async
+src="https://www.googletagmanager.com/gtag/js?id=$gtag"></script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date()); gtag("config", "' . $gtag . '"); </script> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/css/style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+<title>Franklin, a ChatGPT bot</title></head> <body> <div id="content"> <main class="main_section"> <h2 id="title"></h2> <div> <article id="content"><h2>Franklin</h2>';
+  my $fg_bottom = '</article> </div> <aside id="meta"> <div> <h5 id="date"><ahref="https://franklin.oxasploits.com/">Franklin, a ChatGPT AI powered IRC Bot</a> </h5> </div> </aside></main> </div></body>';
+  my $said_html = sanitize($said, html => 1);
+  $textcall_bare = sanitize($textcall_bare, html => 1);
+  $said_html =~ s/\n/<br>/g;
+  open(SAIDHTML, '>', "$httploc$hexfn" . ".html")
+   or Irssi::print "Couldn't open for writing.";
+   binmode(SAIDHTML, "encoding(UTF-8)");
+   print SAIDHTML $fg_top
+    . "<br><i>"
+    . localtime()
+    . "<br>Tokens used: $toks<br>Avg cost: \$$cost<br>"
+    . "</i><br><br><br><b>$nick</b> asked: <br>&nbsp&nbsp&nbsp&nbsp $textcall_bare<br><br>"
+    . $said_html
+    . $fg_bottom;
+   close SAIDHTML;
+   my $said_cut = substr($said, 0, $hardlimit);
+   $said_cut =~ s/\n/ /g; # fixes newlines for irc compat
+   Irssi::print "Franklin: Reply: $said_cut $webaddr$hexfn" . ".html";
+   $server->command("msg $channel $said_cut TXID:$hexfn");
+   $retry++;
+
+

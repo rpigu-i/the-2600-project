@@ -1,0 +1,38 @@
+#!bin/bash
+
+OVERVIEW_URL="https://ec.europa.eu/consumers/consumers_safety/safety_products/rapex/alerts/?event=main.weeklyReports.XML"
+TEMP_OUT=/tmp/temp
+TEMP_MAIL=/tmp/temp_mail
+
+# Download XML
+curl -s -o $TEMP_OUT $OVERVIEW_URL
+
+# grep newest
+CURRENT_URL=`grep -A 1 '<URL>' $TEMP_OUT | head -2 | tail -1`
+
+# Download newest
+curl -s -o $TEMP_OUT $CURRENT_URL
+
+# grep Images
+IMG_URLS=`grep -A 1 '<picture>' $TEMP_OUT | awk -F[ '{ print $3 }' | sed 's/.\{3\}$//' | sed '/^$/d' | sed 's/\(.*\)/<img src="\1" alt="\1" \/>/'`
+
+# generate html template
+cat > $TEMP_MAIL <<EOL
+<!DOCTYPE html>
+<html>
+<head>
+<title>European Commission - Rapid Alert System - Weekly Reports</title>
+</head>
+<body>
+$IMG_URLS
+</body>
+EOL
+
+# send email
+mail -a "Content-type: text/html;" -s "European Commission - Rapid Alert System - Weekly Reports" my@email.com < $TEMP_MAIL
+
+# clean up
+rm $TEMP_OUT
+rm $TEMP_MAIL
+
+

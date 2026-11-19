@@ -1,0 +1,23 @@
+<html>
+<body>
+<script>
+function whatisx()
+{
+	var x = "a string";
+
+	return "Surprise!: X is " + whatisx();
+
+	function whatisx()
+	{
+		var x = 99;
+		return(x);
+	}
+}
+
+</script>
+<div id"x" onclick="alert(whatisx());" style="background:red; color:white;">Click to find out what X is</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,5 @@
+$("#buttonId").onclick(function({
+           Create new parse object
+           Save parse object in database
+});
+

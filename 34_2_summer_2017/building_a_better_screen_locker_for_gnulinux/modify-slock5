@@ -1,0 +1,4 @@
+static void
+unlockscreen(Display *dpy, Lock *lock) {
+usbon();
+

@@ -1,0 +1,9 @@
+count = 1
+for i in urls:
+   if count <= 9:
+       os.system("/usr/local/bin/youtube-dl -o 'Track_0" + str(count) + "_-_%(title)s.%(ext)s' --restrict-filenames " + i)
+   else:
+       os.system("/usr/local/bin/youtube-dl -o 'Track_" + str(count) + "_-_%(title)s.%(ext)s' --restrict-filenames " + i)
+   count = count + 1
+
+

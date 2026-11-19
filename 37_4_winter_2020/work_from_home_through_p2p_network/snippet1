@@ -1,0 +1,14 @@
+[Unit]
+Description=SSH Reverse Tunnel
+After=network.target
+
+[Service]
+Restart=always
+RestartSec=20
+User=u
+ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o "ExitOnForwardFailure yes" -R 8888:localhost:22 u@D.D.D.D
+
+[Install]
+WantedBy=multi-user.target
+
+

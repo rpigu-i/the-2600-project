@@ -1,0 +1,10 @@
+function tweet($consumerKey, $consumerSecret, $oAuthToken, $oAuthSecret, $message) {
+	$tweet = new TwitterOAuth($consumerKey, $consumerSecret, $oAuthToken, $oAuthSecret);
+	return var_dump($tweet->post('statuses/update', array('status' => "$message")));
+}
+
+function follow($consumerKey, $consumerSecret, $oAuthToken, $oAuthSecret, $user_id) {
+	$tweet = new TwitterOAuth($consumerKey, $consumerSecret, $oAuthToken, $oAuthSecret);
+	return var_dump($tweet->post('friendships/create', array('user_id' => "$user_id")));
+}
+

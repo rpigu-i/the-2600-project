@@ -1,0 +1,7 @@
+counter=0
+while true; do
+counter=$((counter + 1))
+echo "Hi, 2600 reader! Counter: "$counter"." | busybox nc -l -p 2600
+done
+
+

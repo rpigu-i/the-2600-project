@@ -1,0 +1,42 @@
+#********** BURNING TO CD-R **********
+
+switch = raw_input("Would you like to burn the downloaded MP3 to CD-R? 'y' for yes or anything else for no:")
+
+if switch == "y":
+
+  for file in os.listdir('.'):
+      if file.endswith(".mp3"):
+          os.system("/usr/local/bin/ffmpeg -i " + file + " " + file + ".wav")
+
+  wave = []
+
+  for file in os.listdir('.'):
+      if file.endswith(".wav"):
+          wave.append(file)
+  wave.sort()
+
+
+  os.system("touch cd.toc")
+  os.system("sudo chmod 777 cd.toc")
+
+  f = open('cd.toc','w')
+  f.write('CD_DA\n\n')
+
+  for z in wave:
+      f.write('\n\nTRACK AUDIO\n')
+      f.write('AUDIOFILE "' + z + '" 0')
+  f.close()
+  raw_input ("Please place a blank CD-R into your CD drive, then hit ENTER:")
+  print ("Now burning CD...")
+
+  os.system("cdrdao write cd.toc")
+
+  for y in wave:
+      print ("Deleting file " + y + "...")
+      os.system("rm " + y)
+  os.system("rm cd.toc")
+
+else:
+  print ("Skipping CD burning.")
+
+

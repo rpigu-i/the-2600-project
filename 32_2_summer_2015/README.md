@@ -8,5 +8,37 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Use Your 3D-Capable TV to View 3D Stills of Your Own Making
 
-*Code details to be added - check https://www.2600.com/code/322/  for available code listings*
+Author: TFE Guy a.k.a. The Man
+
+Files located in `use_your_3d-capable_tv_to_view_3d_stills_of_your_own_making` folder:
+
+* 3DMaker.py
+
+## Nigrum Libro Interceptis
+
+Author: the xorcist
+
+Files located in `nigrum_libro_interceptis` folder:
+
+* main
+* hack
+* hack2
+* fakedate
+* wave
+* peekaboo
+
+## Out of the Box Survival, Part Two
+
+Author: Kris Occhipinti - Metalx1000
+
+Files located in `out_of_the_box_survival_part_two` folder:
+
+* code1
+* code2
+* code3
+* code4
+* code5
+* code6
+

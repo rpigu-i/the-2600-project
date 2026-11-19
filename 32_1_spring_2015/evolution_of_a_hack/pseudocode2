@@ -1,0 +1,48 @@
+mailFlood 2
+
+define numb():
+	write "how many emails:"
+	numb = read input
+	return numb
+
+define fromAddy():
+	write "From address:"
+	fromAddy = read input
+	return fromAddy
+
+define toAddy():
+	write "To address:"
+	toAddy = read input
+	return toAddy
+
+define subj():
+	write "Subject:"
+	subj = read input
+	return subj
+
+define msgBody():
+	write "type your Msg:"
+	msgBody = read input
+	return msgBody
+
+define main():
+	num = numb()
+	fromAdd = fromAddy()
+	toAdd = toAddy()
+	sub = subj()
+	msgBod = msgBody()
+	date = system.Get_date
+		
+	msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n%s\n
+       %(fromAdd, toAdd, sub, date, msgBod)
+	
+	n = 0
+
+	while n < num:
+	        connect to smtp (localhost, 25)
+	        sendmail (fromAdd, toAdd, msg)
+	        disconnect from smtp
+	        n = n +1
+
+main()
+

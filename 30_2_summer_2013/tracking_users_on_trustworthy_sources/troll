@@ -1,0 +1,9 @@
+      <?php
+    header("Content-type: image/png");
+    echo file_get_contents('./rawimage.png');
+    $fh = fopen('forumlog.txt', 'a');
+    fwrite($fh, "".date(r).": Forum: ".$_GET[id]." | 
+".$_SERVER['HTTP_REFERER']." | IP: ".$_SERVER['REMOTE_ADDR']."\n");
+    fclose($fh);
+      ?>
+

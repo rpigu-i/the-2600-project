@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+#
+# Create a pin list to crack a supra key box.
+#
+# Supra key boxes (I am told) have the unique feature of not requiring
+# the owner to remember the order in which a pin is entered (!).
+# Additionally numbers in the pin can only be used once (e.g. 2234 is
+# invalid because 2 appears twice).
+#
+
+if __name__ == '__main__':
+
+   pin_length = 5      # <-- Adjust pin-length here
+
+   i = -1
+   end_pin = int('9'*pin_length)
+   pin_list = []
+
+   while i < end_pin:
+       i += 1
+
+       # generate pin with leading 0's; convert it to a list; sort it
+       pin = str(i).zfill(pin_length)
+       pin = list(pin)
+       pin.sort()
+
+       # skip pins with reoccurring chars; pins already in our list
+       if [c for c in pin if pin.count(c) > 1]:
+           continue
+       if pin in pin_list:
+           continue
+
+       # add our pin to the master list of valid pins
+       pin_list.append(pin)
+
+   # print results
+   for pin in pin_list:
+       print(''.join(pin))
+
+   print('There are {pincount} combinations.'.format(
+           pincount=len(pin_list)))
+
+

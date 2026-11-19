@@ -1,0 +1,4 @@
+#define USBOFF 1
+#define GPGOFF 1
+#define STRICT_USBOFF 0
+

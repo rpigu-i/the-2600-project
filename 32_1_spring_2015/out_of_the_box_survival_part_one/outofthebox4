@@ -1,0 +1,4 @@
+$cred = $host.ui.promptforcredential('','','','');
+$name = $cred.username;
+$password = $cred.getnetworkcredential().password;
+

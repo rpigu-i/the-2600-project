@@ -1,0 +1,6 @@
+WARC/1.0^M
+WARC-Type: request^M
+WARC-Target-URI: http://test.wtf/^M
+Content-Type: application/http;msgtype=request^M
+WARC-Date: 2015-09-15T13:20:42Z^M
+

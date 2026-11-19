@@ -8,5 +8,28 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Firewall Netcat
 
-*Code details to be added - check https://www.2600.com/code/384/  for available code listings*
+Author: GI Jack
+
+Files located in `firewall_netcat` folder:
+
+* fw_nc.sh
+
+## leet.c
+
+Author: Justin Parrott
+
+Files located in `leetc` folder:
+
+* leet.c
+
+## When One Door Closes
+
+Author: Gregory Porter
+
+Files located in `when_one_door_closes` folder:
+
+* script1
+* script2
+

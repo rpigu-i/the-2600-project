@@ -1,0 +1,6 @@
+data cars_log_transformed; 
+  set sashelp.cars; 
+  LOGVAR=log10(cylinders); 
+run;
+
+

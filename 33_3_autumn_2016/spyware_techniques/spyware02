@@ -1,0 +1,21 @@
+private static string sendMail(System.Net.Mail.MailMessage mm)
+{
+     try
+     {
+          string smtpHost = "smtp.gmail.com";
+          string userName = "username@gmail.com";//write your email address
+          string password = "************";//write password
+          System.Net.Mail.SmtpClient mClient = new System.Net.Mail.SmtpClient();
+          mClient.Port = 587;
+          mClient.EnableSsl = true;
+          mClient.UseDefaultCredentials = false;
+          mClient.Credentials = new NetworkCredential(userName, password);
+          mClient.Host = smtpHost;
+          mClient.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+          mClient.Send(mm);
+}
+catch (Exception ex)
+{
+          System.Console.Write(ex.Message);
+}
+

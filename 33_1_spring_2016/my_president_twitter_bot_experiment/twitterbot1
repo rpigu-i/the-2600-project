@@ -1,0 +1,7 @@
+require_once('twitter/twitteroauth.php'); 
+$tweet = new TwitterOAuth($userKey, $userSecret, $userToken, $userTokenSecret);
+$result= $tweet->get('statuses/mentions_timeline', array('since_id'=>1000 , 'cursor' => $cursor, 'count'=>10)); 
+foreach($result as $tweet) {
+	call mybot($tweet->text, $tweet->user->screen_name, $tweet->id_str);
+}
+

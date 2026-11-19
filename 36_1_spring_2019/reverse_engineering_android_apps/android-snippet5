@@ -1,0 +1,6 @@
+const-string v2, "2600 magazine"
+const/16 v3, 0x2b
+invoke-static {v0, v1, v2, v3},
+Lcom/headsup/Hack;->hackInsertWord(Landroid/database/sqlite/SQLiteDatabase;ILjava/lang/String;I)V
+
+

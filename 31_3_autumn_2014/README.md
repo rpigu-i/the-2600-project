@@ -8,5 +8,14 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## The Demoscene - Code, Graphics, and Music Hacking
 
-*Code details to be added - check https://www.2600.com/code/313/  for available code listings*
+Author: Darwin
+
+Files located in `the_demoscene_-_code_graphics_and_music_hacking` folder:
+
+* demoscene1
+* demoscene2
+* demoscene3
+* demoscene4
+

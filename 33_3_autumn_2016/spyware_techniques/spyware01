@@ -1,0 +1,9 @@
+i = i + 1
+string sysName = string.Empty;
+string sysUser = string.Empty;
+Bitmap b = BitMapCreater();
+printScreen = string.Format("{0}{l}", Path.GetTempPath(), "screen" + i + ".jpg"};
+picScreenCapture.Load(printScreen.ToString());
+
+b.Save(printScreen, ImageFormat.jpeg);
+

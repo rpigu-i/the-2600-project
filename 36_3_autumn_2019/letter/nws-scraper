@@ -1,0 +1,30 @@
+import json
+import requests
+
+def find_forecast(long,lat):
+raw=r'https://api.weather.gov/points/'
+
+if long <0:
+long = str(long)[:8]
+else:
+long= str(long)[:7]
+if lat < 0:
+lat = str(lat)[:8]
+else:
+lat= str(lat)[:7]
+API = raw + long +','+lat
+
+response = requests.get(API)
+response.raise_for_status()
+
+data = json.loads(response.text)
+
+return data['properties']['forecast']
+
+def main(url):
+response = requests.get(url)
+response.raise_for_status()
+weather_all = json.loads(response.text)
+return weather_all['properties']['periods'][0]['detailedForecast']
+
+

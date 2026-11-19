@@ -1,0 +1,13 @@
+# alpha is equal to "abcdefghijklmnopqrstuvwxyz"
+rotList = []
+for i in range(len(plainText)):
+ for j in range(0, 26):
+  if plainText[i] in alpha:
+   if rotateChar(plainText[i], j) == cipherText[i]:
+    rotList.append(alpha[j])
+    break
+  else:
+   rotList.append(plainText[i])
+   break
+
+

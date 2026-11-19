@@ -1,0 +1,44 @@
+mailFlood 3
+
+define window():
+	window = GUI()
+	numblbl = Label("Number of Emails")
+	numtxt = Entry()
+
+	fromlbl = Label("From:")
+	fromtxt = Entry()
+	
+	tolbl = Label("To:")
+	totxt = Entry()
+
+	sublbl = Label("Subject:")
+	subtxt = Entry()
+
+	bodylbl = Label("Body:")
+	bodytxt = Entry()
+
+	sendbutton =  Button("Send", cmd=onClicked)
+
+	window.mainloop()
+
+define onClicked():
+	num = int(numtxt.get())
+	fromadd = string(fromtxt.get())
+	toadd = string(totxt.get())
+	subj = string(subtxt.get())
+	body = string(bodytxt.get())
+	date = system.get_date
+
+	msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n%s\n
+       %(fromadd, toadd, subj, date, body)
+
+	n = 0
+
+       while n < num:
+               connect to smtp (localhost, 25)
+               sendmail (fromadd, toadd, msg)
+               disconnect from smtp
+               n = n +1
+
+window()
+

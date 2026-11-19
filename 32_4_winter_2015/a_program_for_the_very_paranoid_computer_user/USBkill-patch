@@ -1,0 +1,23 @@
+--- usbkill.py 2015-09-04 09:55:41.000000000 -0500
++++ usbkill_sigusr1.py 2015-09-22 13:36:41.320000000 -0500
+@@ -438,9 +438,18 @@
+                log(settings, "[INFO] Exiting because exit signal was received")
+                sys.exit(0)
+ 
++       # Define SIGUSR1 handler
++       def usr_handler(signum, frame):
++               print("\n[INFO] Starting system shutdown because SIGUSR1 was receieved\n")
++               log(settings, "[INFO] Starting system shutdown because SIGUSR1 signal was received")
++               kill_computer(settings);
++
+        # Register handlers for clean exit of program
+        for sig in [signal.SIGINT, signal.SIGTERM, signal.SIGQUIT, ]:
+                signal.signal(sig, exit_handler)
++
++       # Kill computer if you receive a SIGUSR1
++       signal.signal (signal.SIGUSR1, usr_handler);
+ 
+        # Start main loop
+        Loop(settings)
+
+

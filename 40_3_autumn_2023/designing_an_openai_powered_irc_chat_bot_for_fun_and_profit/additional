@@ -1,0 +1,6 @@
+push(@chat, "The user: $nick said: $msg - in $channel ");
+ if (scalar(@chat) >= $histlen) {
+  shift(@chat);
+}
+
+

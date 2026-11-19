@@ -1,0 +1,94 @@
+@echo OFF
+
+:: Checking parameters
+if "%~1"=="" (
+    echo ERROR: Input folder needs to be specified.
+    echo Usage: %0 ^<input_folder^>
+    exit /b
+)
+
+set "INPUT=%~1"
+
+:: Check if the folder contains files (non-empty folder)
+if not exist "%INPUT%\*" (
+    echo ERROR: No files to be processed at "%INPUT%"
+    exit /b
+)
+
+:: Output folder
+set "OUTPUT=%INPUT%_output"
+
+:: The folder that stores all the hosts with different file types
+:: that the encrypted files will be embedded to
+set "HOST=%~dp0\host"
+if not exist "%HOST%" (
+	echo ERROR Host file is not found at provided location "%HOST%"
+	exit /b
+)
+
+:: Password to encrypt the files
+set "PASSWORD="
+
+:: Ask for password using PowerShell to hide input
+if "%PASSWORD%"=="" (
+    echo Please enter password for encryption:
+    for /f "delims=" %%p in ('powershell -command "[System.Console]::Write(''); $password=''; while($true) { $key = [System.Console]::ReadKey($true); if ($key.Key -eq 'Enter') { break }; $password += $key.KeyChar } $password"') do set PASSWORD=%%p
+)
+
+REM :: Check if password is empty
+REM if not defined PASSWORD (
+REM    echo ERROR: Password cannot be empty. Please provide a password.
+REM    exit /b
+REM )
+
+:: Temprorary folder for the files being processed
+set "TMP=%TEMP%\steg_enc\%RANDOM%"
+mkdir "%TMP%" > nul 2>&1
+:: Clean the folder if it exists, ensuring itâ€™s empty
+del /S /F /Q "%TMP%\*" > nul
+
+:: MAIN PROCESS
+echo.
+echo Processing...
+
+:: Copy all original files to temporary folder
+xcopy /s "%INPUT%\*.*" "%TMP%\" > nul
+
+:: Fix the issue with unicode filename
+chcp 65001 > nul
+
+:: Encrypt all files in that folder
+SetLocal DisableDelayedExpansion
+for /f "delims=" %%F in ('dir /b /s "%TMP%\*"' ) do (
+    rem if it is not a directory
+    if not exist "%%F\*" (
+        set FILE=%%F
+        CALL %~dp0\encrypt.bat
+    )
+)
+
+:: Ensure output directory exists before copying files
+if not exist "%OUTPUT%" (
+    mkdir "%OUTPUT%"
+)
+
+:: Copy the encrypted files to the output directory
+xcopy /s /q "%TMP%" "%OUTPUT%" > nul
+
+echo ...done.
+
+:: CLEANING UP
+:: Better to reset all global variables after processing
+set "PASSWORD="
+set "FILE="
+
+:: Remove TMP files and folder
+del /S /F /Q "%TMP%\*" > nul
+rmdir /S /Q "%TMP%" > nul
+
+:: Open the output folder for the user
+%SystemRoot%\explorer.exe "%OUTPUT%"
+
+:: PAUSE (Optional, for debugging)
+rem PAUSE
+

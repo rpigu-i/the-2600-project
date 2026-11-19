@@ -1,0 +1,68 @@
+1. Program breakEnigma;
+2. // © 2022 Diana K
+3. Var
+4. subCrypts: array[1..3,1..5] of string = (('T-?-??-???--X-T'),('A-?-??-???-P-A'), ('C-?-??-???-Z-C'),('Q-?-??-???-B-Q'),('G-?-??-???-Q-G'),( <second set for state 2>), (<third set for state 3>);
+5. msg: string;
+6. i, j, k:integer;
+7. settings: array[0..3] of integer = (0,0,0,0);
+8. maxWheel: array[0..3] = (32, 32, 32, 32 );
+9. state:integer;
+10. completed:Boolean;
+11. function decrypt1(cryptMsg): Boolean;
+12. var
+13. I, j, k:integer;
+14. Tmp: string;
+15. Solved : Boolean;
+16. Begin
+17. Tmp:='';
+18. Solved := true;
+19. For i:= 1 to length(cryptMsg)
+20. Do begin
+21. J:=(I mod 4);
+22. // plugboard
+23. Tmp[1]:=chr(((ord(cryptMsg[i])+setting[j]) mod maxWheel[j]); 
+24. // wheel 3
+25. Tmp[2]:=chr(((ord(tmp[1])+setting[(j+1) mod 4]) mod maxWheel[(j+1) mod 4]);
+26. // wheel 2
+27. Tmp[3]:=chr(((ord(tmp[2])+setting[(j+2) mod 4]) mod maxWheel[(j+2) mod 4]);
+28. // wheel 1
+29. Tmp[4]:=chr(((ord(tmp[4])+setting[(j+3) mod 4]) mod maxWheel[(j+3) mod 4]);
+30. Solved:=solved and (cryptMsg[i] = tmp[4]);
+31. End;
+32. Decrypt1:= solved; 
+33. End;
+34. Procedure solvePartialSubCrypt(state:integer; I:integer; settings:integer; subCrypts: string[][]);
+35. Var
+36. I, j, k:integer;
+37. Begin
+38. // convert pseudocode lit to pascal like pseudocode
+39. // a challenge to the reader, easy to do
+40. End;
+41. begin
+42. writeln('Program Break Enigma');
+43. write('Enter Encrypted Message? ');
+44. readln(msg);
+45. writeln;
+46. writeln('…Starting Solving');
+47. for state:=1 to 4
+48. do begin
+49. for i:=4 downto 1
+50. do solvePartialSubCrypt(state, I, settings, subCrypts);
+51. end;
+52. // check work 
+53. Completed:=true;
+54. For state:=1 to 3
+55. Do for j:=1 to 5
+56. Do competed:=completed and decrypt1(subCrypts[state,j]);
+57. // show result
+58. If not completed
+59. Then writeln('A Solution was not found')
+60. Else writeln('A Solution was found');
+61. Writeln;
+62. Writeln('Settings: \tPlugboard \tWheel 3 \tWheel 2 \tWheel1');
+63. Writeln('\t'+settings[0]+'\t'+settings[1]+'\t\+settings[2]+'\t\+settings[3]);
+64. Writeln
+65. Writeln('…Program Completed');
+66. End.
+
+

@@ -1,0 +1,40 @@
+#! /bin/sh
+basic_gpg_decrypt(){
+[ ! -z "$1" ] && VAL=$(gpg --passphrase "$1" -d $HOME/.masterscreen.gpg)
+echo "$VAL"
+}
+generate_gpg_pwfile(){
+PASS=$(whiptail --passwordbox "please enter your secret password" 8 78 --title "password dialog" 3>&1 1>&2 2>&3)
+PASSC=$(whiptail --passwordbox "please confirm your secret password" 8 78 --title "password dialog" 3>&1 1>&2 2>&3)
+LONG_RANDOM_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1)
+[ "$PASS" = "$PASSC" ] && echo "$LONG_RANDOM_PASSWORD" | gpg --cipher-algo AES256 --passphrase "$PASS" --output "$HOME/.masterscreen.gpg" --symmetric
+unset PASS; unset PASSC;
+echo "%echo Generating a basic OpenPGP key
+Key-Type: RSA
+Key-Length: 4096
+Name-Real: masterscreen
+Name-Email: masterscreen@localhost
+Expire-Date: 1y
+Passphrase: $PASSS
+%commit
+%echo done" | gpg --gen-key --batch -
+mkdir -p $HOME/crypt $HOME/.crypt
+echo $PASSS | encfs --stdinpass ~/.crypt ~/crypt
+unset PASSS
+}
+unload_gpg_datask(){
+fusermount -u ~/crypt
+gpg-connect-agent reloadagent /bye
+
+load_gpg_datask(){
+VAL=basic_gpg_decrypt "$1"
+gpg-agent --add "$2" --passphrase "$VAL" || echo "failure" && unload_gpg_datask
+echo $VAL | encfs $HOME/.crypt $HOME/crypt --stdinpass || echo "failure" && unload_gpg_datask
+}
+if [ -f "$HOME/.masterscreen.gpg" ]; then
+[ -z "$2" ] && [ -z "$1" ] && load_gpg_datask "$2" "$1"
+[ ! -z "$1" ] && unload_gpg_datask
+else
+generate_gpg_pwfile
+fi
+

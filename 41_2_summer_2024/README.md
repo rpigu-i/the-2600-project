@@ -8,5 +8,37 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Cookie Monster
 
-*Code details to be added - check https://www.2600.com/code/412/  for available code listings*
+Author: Street
+
+Files located in `cookie_monster` folder:
+
+* cookie-monster-virus
+
+## Understanding MAC Addresses: Construction, Significance, and Spoofing Methods
+
+Author: Dar Martin
+
+Files located in `understanding_mac_addresses_construction_significance_and_spoofing_methods` folder:
+
+* powershell
+* python-script
+* bash-script
+
+## Quick Disk Overwrite Script
+
+Author: Rob
+
+Files located in `quick_disk_overwrite_script` folder:
+
+* overwrite-script
+
+## I Sell Shoe Oil
+
+Author: Soleless Hobo
+
+Files located in `i_sell_shoe_oil` folder:
+
+* found-words.py
+

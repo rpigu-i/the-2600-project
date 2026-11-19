@@ -8,5 +8,29 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
+## Splunking the Google Dork
 
-*Code details to be added - check https://www.2600.com/code/302/  for available code listings*
+Author: G Dorking
+
+Files located in `splunking_the_google_dork` folder:
+
+* stanzas
+
+## My First Blackhat
+
+Author: Pierre LC
+
+Files located in `my_first_blackhat` folder:
+
+* code1
+* code2
+* code3
+
+## Tracking Users on Trustworthy Sources
+
+Author: xnite
+
+Files located in `tracking_users_on_trustworthy_sources` folder:
+
+* troll
+

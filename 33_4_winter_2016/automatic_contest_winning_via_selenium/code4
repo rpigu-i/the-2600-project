@@ -1,0 +1,7 @@
+driver.switch_to.frame("blenderIFrame")
+driver.switch_to.frame("webBlendHost")
+driver.switch_to.frame("appHost")
+codebox = driver.find_element_by_id('tokenField')
+codebox.send_keys("QQQQQ-QQQQQ-QQQQQ-QQQQQ-QQQQQ")
+Codebox.send_keys(Keys.RETURN)
+

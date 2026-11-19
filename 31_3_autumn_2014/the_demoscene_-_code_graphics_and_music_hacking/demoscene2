@@ -1,0 +1,13 @@
+Include a function, frac(), to return a number's fractional part.
+Define a polygon.
+For i=top of polygon to number of scanlines:
+ Define ax,bx,cx,dx as x-values at points a,b,c,d.
+ Define atone,btone as tones at points a,b.
+ Let gradient=(btone-atone)/(bx-ax).
+ Let ctone=at+(1-frac(ax))*gradient.
+ For j=cx to dx:
+  Put pixel at (x,y) with colour ctone.
+  ctone=ctone+gradient.
+ End for.
+End for.
+
