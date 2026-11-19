@@ -1,6 +1,6 @@
 # Volume 32, Number 1: Spring 2015
 
-![2600 Magazine Spring 2015](https://www.2600.com/sites/default/files/styles/large/public/sp151.gif)
+![2600 Magazine Spring 2015](https://www.2600.com/sites/default/files/styles/large/public/covers/sp151.jpg)
 
 Code in this repository comes from the Spring 2015 edition of #2600.
 

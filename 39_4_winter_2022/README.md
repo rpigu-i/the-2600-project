@@ -1,6 +1,6 @@
 # Volume 39, Number 4: Winter 2022-2023
 
-![2600 Magazine Winter 2022-2023](https://www.2600.com/sites/default/files/styles/large/public/wi221.gif)
+![2600 Magazine Winter 2022-2023](https://www.2600.com/sites/default/files/styles/large/public/covers/39-4-Cover.jpg)
 
 Code in this repository comes from the Winter 2022-2023 edition of #2600.
 

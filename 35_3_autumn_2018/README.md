@@ -1,6 +1,6 @@
 # Volume 35, Number 3: Autumn 2018
 
-![2600 Magazine Autumn 2018](https://www.2600.com/sites/default/files/styles/large/public/au181.gif)
+![2600 Magazine Autumn 2018](https://www.2600.com/sites/default/files/styles/large/public/covers/35-3_Cover-Web.jpg)
 
 Code in this repository comes from the Autumn 2018 edition of #2600.
 
@@ -29,17 +29,17 @@ Files located in `totalitarian_control_how_we_used_powershell_to_manipulate_user
 
 ## Citizen Engineer - Morse Code, Android, Assistive Tech
 
-Author: Limor âLadyadaâ Fried and Phillip Torrone
+Author: Limor "Ladyada" Fried and Phillip Torrone
 
 Files located in `citizen_engineer_-_morse_code_android_assistive_tech` folder:
 
 * CircuitPython-code
 
-## Gone Phishinâ
+## Gone Phishin'
 
 Author: Columbo
 
-Files located in `gone_phishinâ` folder:
+Files located in `gone_phishin` folder:
 
 * sudoers
 

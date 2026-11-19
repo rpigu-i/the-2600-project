@@ -1,6 +1,6 @@
 # Volume 38, Number 4: Winter 2021-2022
 
-![2600 Magazine Winter 2021-2022](https://www.2600.com/sites/default/files/styles/large/public/wi211.gif)
+![2600 Magazine Winter 2021-2022](https://www.2600.com/sites/default/files/styles/large/public/covers/38-4_cover.jpg)
 
 Code in this repository comes from the Winter 2021-2022 edition of #2600.
 

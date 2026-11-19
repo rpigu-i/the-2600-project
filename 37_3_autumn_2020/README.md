@@ -1,6 +1,6 @@
 # Volume 37, Number 3: Autumn 2020
 
-![2600 Magazine Autumn 2020](https://www.2600.com/sites/default/files/styles/large/public/au201.gif)
+![2600 Magazine Autumn 2020](https://www.2600.com/sites/default/files/styles/large/public/covers/37-3_Cover.jpg)
 
 Code in this repository comes from the Autumn 2020 edition of #2600.
 
@@ -8,11 +8,11 @@ The code was available in the magazine, or via the website at https://www.2600.c
 
 A back issue of the magazine can be purchased from the 2600 magazine website at https://store.2600.com/collections/back-issues/
 
-## Smile, Youâre On Camera
+## Smile, You're On Camera
 
 Author: Alsch
 
-Files located in `smile_youâre_on_camera` folder:
+Files located in `smile_you're_on_camera` folder:
 
 * camera-source
 

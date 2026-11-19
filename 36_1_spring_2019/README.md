@@ -1,6 +1,6 @@
 # Volume 36, Number 1: Spring 2019
 
-![2600 Magazine Spring 2019](https://www.2600.com/sites/default/files/styles/large/public/sp191.gif)
+![2600 Magazine Spring 2019](https://www.2600.com/sites/default/files/styles/large/public/covers/36-1_Cover.jpg)
 
 Code in this repository comes from the Spring 2019 edition of #2600.
 

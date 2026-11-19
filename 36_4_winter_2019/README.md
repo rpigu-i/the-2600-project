@@ -1,6 +1,6 @@
 # Volume 36, Number 4: Winter 2019-2020
 
-![2600 Magazine Winter 2019-2020](https://www.2600.com/sites/default/files/styles/large/public/wi191.gif)
+![2600 Magazine Winter 2019-2020](https://www.2600.com/sites/default/files/styles/large/public/covers/36-4_Cover-small.jpg)
 
 Code in this repository comes from the Winter 2019-2020 edition of #2600.
 

@@ -1,6 +1,6 @@
 # Volume 32, Number 2: Summer 2015
 
-![2600 Magazine Summer 2015](https://www.2600.com/sites/default/files/styles/large/public/su151.gif)
+![2600 Magazine Summer 2015](https://www.2600.com/sites/default/files/styles/large/public/covers/su151.jpg)
 
 Code in this repository comes from the Summer 2015 edition of #2600.
 

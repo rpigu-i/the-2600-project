@@ -1,6 +1,6 @@
 # Volume 37, Number 4: Winter 2020-2021
 
-![2600 Magazine Winter 2020-2021](https://www.2600.com/sites/default/files/styles/large/public/wi201.gif)
+![2600 Magazine Winter 2020-2021](https://www.2600.com/sites/default/files/styles/large/public/covers/37-4_Cover.png)
 
 Code in this repository comes from the Winter 2020-2021 edition of #2600.
 

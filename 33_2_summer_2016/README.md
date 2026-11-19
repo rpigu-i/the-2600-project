@@ -1,6 +1,6 @@
 # Volume 33, Number 2: Summer 2016
 
-![2600 Magazine Summer 2016](https://www.2600.com/sites/default/files/styles/large/public/su161.gif)
+![2600 Magazine Summer 2016](https://www.2600.com/sites/default/files/styles/large/public/covers/su161.jpg)
 
 Code in this repository comes from the Summer 2016 edition of #2600.
 

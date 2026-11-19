@@ -1,6 +1,6 @@
 # Volume 31, Number 2: Summer 2014
 
-![2600 Magazine Summer 2014](https://www.2600.com/sites/default/files/styles/large/public/su141.gif)
+![2600 Magazine Summer 2014](https://www.2600.com/sites/default/files/styles/large/public/covers/su141.jpg)
 
 Code in this repository comes from the Summer 2014 edition of #2600.
 

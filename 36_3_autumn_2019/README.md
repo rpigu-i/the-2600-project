@@ -1,6 +1,6 @@
 # Volume 36, Number 3: Autumn 2019
 
-![2600 Magazine Autumn 2019](https://www.2600.com/sites/default/files/styles/large/public/au191.gif)
+![2600 Magazine Autumn 2019](https://www.2600.com/sites/default/files/styles/large/public/covers/3q19-cover.jpg)
 
 Code in this repository comes from the Autumn 2019 edition of #2600.
 

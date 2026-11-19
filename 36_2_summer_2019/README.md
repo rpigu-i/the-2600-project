@@ -1,6 +1,6 @@
 # Volume 36, Number 2: Summer 2019
 
-![2600 Magazine Summer 2019](https://www.2600.com/sites/default/files/styles/large/public/su191.gif)
+![2600 Magazine Summer 2019](https://www.2600.com/sites/default/files/styles/large/public/covers/36-2_Cover.jpg)
 
 Code in this repository comes from the Summer 2019 edition of #2600.
 

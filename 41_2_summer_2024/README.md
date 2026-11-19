@@ -1,6 +1,6 @@
 # Volume 41, Number 2: Summer 2024
 
-![2600 Magazine Summer 2024](https://www.2600.com/sites/default/files/styles/large/public/su241.gif)
+![2600 Magazine Summer 2024](https://www.2600.com/sites/default/files/styles/large/public/covers/41-2_Cover.jpg)
 
 Code in this repository comes from the Summer 2024 edition of #2600.
 

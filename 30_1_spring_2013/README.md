@@ -1,6 +1,6 @@
 # Volume 30, Number 1: Spring 2013
 
-![2600 Magazine Spring 2013](https://www.2600.com/sites/default/files/styles/large/public/sp131.gif)
+![2600 Magazine Spring 2013](https://www.2600.com/sites/default/files/styles/large/public/covers/sp131.jpg)
 
 Code in this repository comes from the Spring 2013 edition of #2600.
 

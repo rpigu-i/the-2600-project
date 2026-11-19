@@ -1,6 +1,6 @@
 # Volume 30, Number 2: Summer 2013
 
-![2600 Magazine Summer 2013](https://www.2600.com/sites/default/files/styles/large/public/su131.gif)
+![2600 Magazine Summer 2013](https://www.2600.com/sites/default/files/styles/large/public/covers/su131.gif)
 
 Code in this repository comes from the Summer 2013 edition of #2600.
 

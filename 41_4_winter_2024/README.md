@@ -1,6 +1,6 @@
 # Volume 41, Number 4: Winter 2024-2025
 
-![2600 Magazine Winter 2024-2025](https://www.2600.com/sites/default/files/styles/large/public/wi241.gif)
+![2600 Magazine Winter 2024-2025](https://www.2600.com/sites/default/files/styles/large/public/covers/41-4_Cover.jpg)
 
 Code in this repository comes from the Winter 2024-2025 edition of #2600.
 

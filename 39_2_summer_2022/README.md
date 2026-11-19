@@ -1,6 +1,6 @@
 # Volume 39, Number 2: Summer 2022
 
-![2600 Magazine Summer 2022](https://www.2600.com/sites/default/files/styles/large/public/su221.gif)
+![2600 Magazine Summer 2022](https://www.2600.com/sites/default/files/styles/large/public/covers/39-2_cover.jpg)
 
 Code in this repository comes from the Summer 2022 edition of #2600.
 
@@ -16,11 +16,11 @@ Files located in `command_line_unminifier` folder:
 
 * webballoon
 
-## Iâll Take Some VigenÃ¨re With My Caesar
+## I'll Take Some Vigenère With My Caesar
 
 Author: snooze
 
-Files located in `iâll_take_some_vigenãre_with_my_caesar` folder:
+Files located in `i'll_take_some_vigenère_with_my_caesar` folder:
 
 * code1
 * code2
@@ -34,11 +34,11 @@ Files located in `dial-a-word` folder:
 
 * dial-a-word
 
-## Brute-Forcing a Museumâs Math Puzzle With Python
+## Brute-Forcing a Museum's Math Puzzle With Python
 
 Author: Brenden Hyde
 
-Files located in `brute-forcing_a_museumâs_math_puzzle_with_python` folder:
+Files located in `brute-forcing_a_museum's_math_puzzle_with_python` folder:
 
 * snippet1
 * snippet2

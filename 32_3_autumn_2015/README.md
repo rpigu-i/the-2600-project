@@ -1,6 +1,6 @@
 # Volume 32, Number 3: Autumn 2015
 
-![2600 Magazine Autumn 2015](https://www.2600.com/sites/default/files/styles/large/public/au151.gif)
+![2600 Magazine Autumn 2015](https://www.2600.com/sites/default/files/styles/large/public/covers/fa151.jpg)
 
 Code in this repository comes from the Autumn 2015 edition of #2600.
 

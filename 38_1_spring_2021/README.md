@@ -1,6 +1,6 @@
 # Volume 38, Number 1: Spring 2021
 
-![2600 Magazine Spring 2021](https://www.2600.com/sites/default/files/styles/large/public/sp211.gif)
+![2600 Magazine Spring 2021](https://www.2600.com/sites/default/files/styles/large/public/covers/38-1_Cover.jpg)
 
 Code in this repository comes from the Spring 2021 edition of #2600.
 

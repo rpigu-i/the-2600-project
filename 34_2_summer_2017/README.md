@@ -1,6 +1,6 @@
 # Volume 34, Number 2: Summer 2017
 
-![2600 Magazine Summer 2017](https://www.2600.com/sites/default/files/styles/large/public/su171.gif)
+![2600 Magazine Summer 2017](https://www.2600.com/sites/default/files/styles/large/public/covers/su171.jpg)
 
 Code in this repository comes from the Summer 2017 edition of #2600.
 

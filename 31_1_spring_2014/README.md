@@ -1,6 +1,6 @@
 # Volume 31, Number 1: Spring 2014
 
-![2600 Magazine Spring 2014](https://www.2600.com/sites/default/files/styles/large/public/sp141.gif)
+![2600 Magazine Spring 2014](https://www.2600.com/sites/default/files/styles/large/public/covers/sp141.jpg)
 
 Code in this repository comes from the Spring 2014 edition of #2600.
 

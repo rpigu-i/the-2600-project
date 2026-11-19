@@ -1,6 +1,6 @@
 # Volume 34, Number 4: Winter 2017-2018
 
-![2600 Magazine Winter 2017-2018](https://www.2600.com/sites/default/files/styles/large/public/wi171.gif)
+![2600 Magazine Winter 2017-2018](https://www.2600.com/sites/default/files/styles/large/public/covers/34-4_Cover.jpg)
 
 Code in this repository comes from the Winter 2017-2018 edition of #2600.
 

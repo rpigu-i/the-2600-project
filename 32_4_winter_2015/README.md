@@ -1,6 +1,6 @@
 # Volume 32, Number 4: Winter 2015-2016
 
-![2600 Magazine Winter 2015-2016](https://www.2600.com/sites/default/files/styles/large/public/wi151.gif)
+![2600 Magazine Winter 2015-2016](https://www.2600.com/sites/default/files/styles/large/public/covers/wi151.jpg)
 
 Code in this repository comes from the Winter 2015-2016 edition of #2600.
 
