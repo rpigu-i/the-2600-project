@@ -56,9 +56,49 @@ The code in this repository is for educational and research purposes only. As ma
 
 ## Magazine Editions Ported
 
-* Spring 2004 - Autumn 2026 (All editions from Volume 21 through Volume 43, Issue 3)
+* Spring 1984 - Autumn 2026 (All editions from Volume 1 through Volume 43, Issue 3)
 
 ### Complete List by Year:
+
+**1984 (Volume 1):** Spring, Summer, Autumn, Winter
+
+**1985 (Volume 2):** Spring, Summer, Autumn, Winter
+
+**1986 (Volume 3):** Spring, Summer, Autumn, Winter
+
+**1987 (Volume 4):** Spring, Summer, Autumn, Winter
+
+**1988 (Volume 5):** Spring, Summer, Autumn, Winter
+
+**1989 (Volume 6):** Spring, Summer, Autumn, Winter
+
+**1990 (Volume 7):** Spring, Summer, Autumn, Winter
+
+**1991 (Volume 8):** Spring, Summer, Autumn, Winter
+
+**1992 (Volume 9):** Spring, Summer, Autumn, Winter
+
+**1993 (Volume 10):** Spring, Summer, Autumn, Winter
+
+**1994 (Volume 11):** Spring, Summer, Autumn, Winter
+
+**1995 (Volume 12):** Spring, Summer, Autumn, Winter
+
+**1996 (Volume 13):** Spring, Summer, Autumn, Winter
+
+**1997 (Volume 14):** Spring, Summer, Autumn, Winter
+
+**1998 (Volume 15):** Spring, Summer, Autumn, Winter
+
+**1999 (Volume 16):** Spring, Summer, Autumn, Winter
+
+**2000 (Volume 17):** Spring, Summer, Autumn, Winter
+
+**2001 (Volume 18):** Spring, Summer, Autumn, Winter
+
+**2002 (Volume 19):** Spring, Summer, Autumn, Winter
+
+**2003 (Volume 20):** Spring, Summer, Autumn, Winter
 
 **2004 (Volume 21):** Spring, Summer, Autumn, Winter
 
